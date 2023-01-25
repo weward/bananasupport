@@ -16,5 +16,4 @@ class Admin extends Model
         'updated_at',
     ];
 
-    
 }

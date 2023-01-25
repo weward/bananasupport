@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasReadableDates;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,6 +18,9 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasReadableDates;
+
+    protected $table = "users";
 
     /**
      * The attributes that are mass assignable.
@@ -57,5 +61,48 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'readable_created_at',
+        'readable_updated_at'
     ];
+
+    /**
+     * Get all of the User's tickets
+     */
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    /**
+     * Get all of the User's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * Get all active users
+     */
+    public function scopeActive($query)
+    {
+        $query->where('active', 1);
+    }
+
+    /**
+     * Get all active users
+     */
+    public function scopeInactive($query)
+    {
+        $query->where('active', 0);
+    }
+
+    /**
+     * Get all users based on their status
+     */
+    public function scopeStatus($query, $status)
+    {
+        $query->where('active', $status);
+    }
+
 }
