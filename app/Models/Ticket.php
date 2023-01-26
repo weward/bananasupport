@@ -13,9 +13,15 @@ class Ticket extends Model
 
     protected $table = "tickets";
 
+    protected $with = [
+        "reporter",
+    ];
+
     protected $appends = [
+        'id_label',
         'readable_created_at',
-        'readable_updated_at'
+        'readable_updated_at',
+        'status_label',
     ];
 
     protected $dates = [
@@ -28,7 +34,7 @@ class Ticket extends Model
      */
     public function reporter()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     
     /**
@@ -77,6 +83,24 @@ class Ticket extends Model
     public function scopeStatus($query, $status)
     {
         $query->where('status', $status);
+    }
+
+    public function scopeOwner($query)
+    {
+        $query->where('user_id', auth()->guard('web')->user()->id);
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        return $this->status ? "Open" : "Closed";
+    }
+
+    public function getIdLabelAttribute()
+    {
+        $prependedId = sprintf("%012d", $this->id);
+        $currYear = $this->created_at->copy()->format('Y');
+
+        return $currYear . "-" . $prependedId;
     }
 
 }

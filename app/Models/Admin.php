@@ -11,6 +11,8 @@ class Admin extends Model
 
     protected $table = "admins";
 
+    protected $guard = "admin";
+
     protected $dates = [
         'created_at',
         'updated_at',

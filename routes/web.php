@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Tickets;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware([
@@ -25,4 +27,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('tickets', Tickets::class)->name('livewire.tickets');
 });
