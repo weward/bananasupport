@@ -13,7 +13,7 @@
 
         <x-slot name="content">
             
-            <x-jet-form-section submit="createApiToken"  class="text-center">
+            <x-jet-form-section submit="newTicket"  class="text-center">
                 <x-slot name="title">
                     {{ __('Create New Support Ticket') }}
                 </x-slot>
@@ -30,7 +30,7 @@
                         <x-jet-input-error for="formData.subject" class="mt-2 text-left" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-4">
+                    <div class="col-span-6 sm:col-span-4 body-content" wire:ignore>
                         <x-jet-label for="content" class="text-left" value="{{ __('Content') }}"/>
                         <textarea 
                             id="content" 
@@ -39,6 +39,7 @@
                             autofocus
                             wire:model.defer="formData.content">
                         </textarea>
+
                         <x-jet-input-error for="formData.content" class="mt-2 text-left" />
                     </div>
 

@@ -20,4 +20,9 @@ trait HasReadableDates
         return $this->updated_at->copy()->diffForHumans();
     }
 
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->created_at->copy()->format('m/d/Y G:i A');
+    }
+
 }

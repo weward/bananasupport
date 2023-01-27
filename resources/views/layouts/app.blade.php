@@ -22,6 +22,7 @@
 
         <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
 
+        
     </head>
     <body class="font-sans antialiased text-left">
         <x-jet-banner />
