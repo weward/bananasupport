@@ -4,21 +4,21 @@
     <x-jet-secondary-button 
         id="show-ticket-filter-btn"
         wire:loading.attr="disabled"
-        class="px-4 py-2 rounded-md hover:bg-gray-200 hover:text-white click:text-black"
+        class="px-4 py-2 rounded-md text-xl hover:bg-gray-200 hover:text-white click:text-black"
         wire:click="goToRoute('livewire.tickets')">
-            {{ _('Reset') }}
+            {{-- {{ _('Reset') }} --}}
+            <ion-icon name="refresh" class="visible"></ion-icon>
     </x-jet-secondary-button>
-    
-    @if (! $showTicketsFilter)
+        
     <x-jet-secondary-button 
         id="show-ticket-filter-btn"
         wire:loading.attr="disabled"
-        class="px-4 py-2 rounded-md text-white bg-gray-400 hover:bg-gray-200 hover:text-gray-900 click:text-black"
+        class="px-4 py-2 rounded-md text-xl text-white bg-amber-400 hover:bg-amber-200 hover:text-gray-900 click:text-black"
         wire:click="$toggle('showTicketsFilter')">
-            {{ _('Filter') }}
+            {{-- @if (! $showTicketsFilter) {{ _('Filter') }} @else  {{ _('Close') }} @endif  --}}
+            @if (! $showTicketsFilter) <ion-icon name="switch" class="visible"></ion-icon> @else  <ion-icon name="close" class="visible"></ion-icon>  @endif 
     </x-jet-secondary-button>
-    @endif
-
+    
 
     @if ($showTicketsFilter)
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
@@ -51,7 +51,6 @@
                             <x-jet-label for="content" class="text-left" value="{{ __('Sort By') }}"/>
                             <select 
                                 id="filter-tickets-sort"
-                                {{-- wire:click.defer="selectSortBy" --}}
                                 wire:model.defer="sortBy"
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">
                                 <option value="">Any</option>
@@ -61,7 +60,6 @@
                             <x-jet-input-error for="sortBy" class="mt-2 text-left" />
                         </div>
 
-                        {{-- @if ($sortBy) --}}
                         <div class="col-span-12 md:col-span-4 md:pl-2">
                             <x-jet-label for="content" class="text-left" value="{{ __('Order') }}"/>
                             <select 
@@ -75,7 +73,6 @@
                             </select>
                             <x-jet-input-error for="orderBy" class="mt-2 text-left" />
                         </div>
-                        {{-- @endif --}}
 
                     </div>
                 </x-slot>
@@ -86,17 +83,9 @@
         <div class="flex justify-center mt-12">
             <x-jet-secondary-button 
                 id="hide-ticket-filter-btn"
-                wire:click="$toggle('showTicketsFilter')"
-                wire:loading.attr="disabled"
-                class="">
-                    {{ _('Close') }}
-            </x-jet-secondary-button>
-        
-            <x-jet-secondary-button 
-                id="hide-ticket-filter-btn"
                 wire:click="filterTickets"
                 wire:loading.attr="disabled"
-                class="ml-2 px-4 py-2 rounded-md text-white bg-gray-400 hover:bg-gray-200 hover:text-gray-900 click:text-black">
+                class="ml-2 px-4 py-2 rounded-md text-white bg-amber-400 hover:bg-amber-200 hover:text-gray-900 click:text-black">
                     {{ _('Filter') }}
             </x-jet-secondary-button>
         </div>
