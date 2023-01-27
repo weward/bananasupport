@@ -14,6 +14,7 @@ class Ticket extends Model
 
     protected $table = "tickets";
 
+    public $timezone = "Asia/Manila";
     
     protected $with = [
         "reporter",
@@ -169,12 +170,12 @@ class Ticket extends Model
      *
      * @param  QueryBuilder $query
      * @param  string       $col
-     * @param  string       $sortBy
+     * @param  string       $orderBy
      * @return void
      */
-    public function scopeFilterOrder($query, $col = 'created_at', $sortBy='DESC')
+    public function scopeFilterOrder($query, $col = 'created_at', $orderBy='DESC')
     {
-        $query->orderBy($col, $sortBy);
+        $query->orderBy($col, $orderBy);
     }
     
     /**
@@ -196,7 +197,7 @@ class Ticket extends Model
     public function getIdLabelAttribute()
     {
         $prependedId = sprintf("%012d", $this->id);
-        $currYear = $this->created_at->copy()->format('Y');
+        $currYear = $this->created_at->copy()->setTimezone($this->timezone)->format('Y');
 
         return $currYear . "-" . $prependedId;
     }
@@ -210,7 +211,7 @@ class Ticket extends Model
      */
     public function getHasBeenUpdatedAttribute()
     {
-        return ($this->updated_at->copy()->ne($this->created_at->copy()));
+        return ($this->updated_at->copy()->setTimezone($this->timezone)->ne($this->created_at->copy()));
     }
 
 }

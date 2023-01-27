@@ -1,5 +1,14 @@
 
 <div class="w-full text-right">
+    
+    <x-jet-secondary-button 
+        id="show-ticket-filter-btn"
+        wire:loading.attr="disabled"
+        class="px-4 py-2 rounded-md hover:bg-gray-200 hover:text-white click:text-black"
+        wire:click="goToRoute('livewire.tickets')">
+            {{ _('Reset') }}
+    </x-jet-secondary-button>
+    
     @if (! $showTicketsFilter)
     <x-jet-secondary-button 
         id="show-ticket-filter-btn"
@@ -42,7 +51,7 @@
                             <x-jet-label for="content" class="text-left" value="{{ __('Sort By') }}"/>
                             <select 
                                 id="filter-tickets-sort"
-                                wire:click.defer="selectSortBy"
+                                {{-- wire:click.defer="selectSortBy" --}}
                                 wire:model.defer="sortBy"
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">
                                 <option value="">Any</option>
@@ -52,7 +61,7 @@
                             <x-jet-input-error for="sortBy" class="mt-2 text-left" />
                         </div>
 
-                        @if ($sortBy)
+                        {{-- @if ($sortBy) --}}
                         <div class="col-span-12 md:col-span-4 md:pl-2">
                             <x-jet-label for="content" class="text-left" value="{{ __('Order') }}"/>
                             <select 
@@ -66,7 +75,7 @@
                             </select>
                             <x-jet-input-error for="orderBy" class="mt-2 text-left" />
                         </div>
-                        @endif
+                        {{-- @endif --}}
 
                     </div>
                 </x-slot>

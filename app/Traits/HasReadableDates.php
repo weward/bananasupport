@@ -4,12 +4,14 @@ namespace App\Traits;
 
 trait HasReadableDates
 {
+    public $timezone = "Asia/Manila";
+
     /**
      * Get the Ticket's created_at attribute in human-readable format
      */
     public function getReadableCreatedAtAttribute()
     {
-        return $this->created_at->copy()->diffForHumans();
+        return $this->created_at->copy()->setTimezone($this->timezone)->diffForHumans();
     }
 
     /**
@@ -17,12 +19,12 @@ trait HasReadableDates
      */
     public function getReadableUpdatedAtAttribute()
     {
-        return $this->updated_at->copy()->diffForHumans();
+        return $this->updated_at->copy()->setTimezone($this->timezone)->diffForHumans();
     }
 
     public function getFormattedCreatedAtAttribute()
     {
-        return $this->created_at->copy()->format('m/d/Y G:i A');
+        return $this->created_at->copy()->setTimezone($this->timezone)->format('m/d/Y G:i A');
     }
 
 }

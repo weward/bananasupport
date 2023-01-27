@@ -26,14 +26,18 @@ class NewTicketModal extends Component
         $ticket->save();
 
         if ($ticket) {
+
+            // Dispatch Job to process emails....
+            
+            // Reset the form
             $this->resetForm();
             $this->toggleTicketModal('New', 0);
-            // Update the table 
-            $this->emitTo('tickets', 'tableUpdated');
-
+            
             if (url()->current() != route('livewire.tickets')) {
                 return redirect()->route('livewire.tickets');
             }
+            // Update the table 
+            $this->emitTo('tickets', 'tableUpdated');
         }
     }
 

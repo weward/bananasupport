@@ -4,12 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Ticket;
 use App\Models\User;
+use App\Traits\HasNavigation;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Tickets extends Component
 {
     use WithPagination;
+    use HasNavigation;
     
     public $title = "Filed Tickets";
     public $description = "";
@@ -105,9 +107,9 @@ class Tickets extends Component
             $filters['sortBy'] = $this->sortBy;
         }
 
-        if ($this->orderBy) {
-            $filters['orderBy'] = $this->orderBy;
-        }
+        // if ($this->orderBy) {
+            $filters['orderBy'] = $this->orderBy ?: "DESC";
+        // }
 
         return $filters;
     }
