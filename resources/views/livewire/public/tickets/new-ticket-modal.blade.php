@@ -4,7 +4,6 @@
             id="new-ticket-btn"
             wire:loading.attr="disabled"
             class="px-4 py-2 rounded-md bg-amber-400 hover:bg-amber-200 click:text-black text-white"
-            {{-- wire:click="toggleTicketModal('New', true)"> --}}
             wire:click="$emit('toggleTicketModal', 'New', true)">
                 {{ _('Support') }}
         </x-jet-secondary-button>

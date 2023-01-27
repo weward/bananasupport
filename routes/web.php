@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\User\TicketController;
 use App\Http\Livewire\Tickets;
+use App\Http\Livewire\ViewTicket;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::bind('ticket', function($ticket) {
+    return Ticket::findOrFail($ticket);
+});
 
 Route::get('/', function () {
     return view('auth.login');
@@ -27,5 +34,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    // Route::get('tickets', [TicketController::class, 'index'])->name('livewire.tickets');
     Route::get('tickets', Tickets::class)->name('livewire.tickets');
+    Route::get('tickets/{ticket}', ViewTicket::class)->name('livewire.tickets.show');
 });

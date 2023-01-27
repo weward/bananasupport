@@ -13,7 +13,7 @@ class Tickets extends Component
     
     public $title = "Filed Tickets";
     public $description = "";
-    public $perPage = 2;
+    public $perPage = 10;
     public $showTicketsFilter = false;
 
     public $status = '';

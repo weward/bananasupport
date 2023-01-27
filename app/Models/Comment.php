@@ -15,7 +15,9 @@ class Comment extends Model
 
     protected $appends = [
         'readable_created_at',
-        'readable_updated_at'
+        'readable_updated_at',
+        'formatted_created_at',
+        'is_admin',
     ];
 
     protected $dates = [
@@ -23,12 +25,31 @@ class Comment extends Model
         'updated_at',
     ];
 
+    protected $touches = ['ticket'];
+
+    protected $guarded = [];
+
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
+
     /**
      * Get the parent commentable model (User or Admin).
      */
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    public function getIsAdminAttribute()
+    {
+        if ($this->commentable && $this->commentable instanceof Admin) {
+            return true;
+        }
+
+        return false;
     }
 
 }

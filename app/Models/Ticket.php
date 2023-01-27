@@ -23,6 +23,7 @@ class Ticket extends Model
         'id_label',
         'readable_created_at',
         'readable_updated_at',
+        'formatted_created_at',
         'status_label',
         'has_been_updated',
     ];
@@ -161,9 +162,6 @@ class Ticket extends Model
                 };
             }
         }
-
-        // Tickets for Auth User or Admin
-        // $query->byAuth();
     }
     
     /**

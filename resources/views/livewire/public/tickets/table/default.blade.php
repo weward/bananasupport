@@ -1,9 +1,9 @@
-@props(['tickets'])
-
 <div class="w-full">
     @if ($tickets->count())
         @foreach ($tickets as $ticket)
-        <div class="flex justify-between p-3 mt-3 m-b-3 rounded-lg border bg-gray-50 hover:bg-amber-50 hover:cursor-pointer">
+        <div class="flex justify-between p-6 mt-3 m-b-3 rounded-lg border hover:bg-amber-50 hover:cursor-pointer 
+            @if ($ticket->status) {{ 'border-l-4 border-l-green-200' }} @else {{ 'border-l-4 border-l-red-200' }} @endif
+            ">
             <div class="lg:w-5/6 w-4/5">
                 <div class="text-xs text-gray-600">{{ $ticket->id_label }}</div>
                 <div class="font-extrabold text-md text-gray-900 truncate">{{ $ticket->subject }}</div>
@@ -15,9 +15,14 @@
             </div>
             <div class="grid content-between min-w-fit">
                 <div class="p-1 text-sm text-gray-600 text-right hover:bg-gray-100 h-fit rounded-lg ">
-                    <span class="text-xl px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="eye" class="md:visible"></ion-icon></span>
-                    @if ($ticket->status)
                     <a 
+                        href="{{ route('livewire.tickets.show', $ticket->id) }}" 
+                        class="text-xl px-2 hover:text-amber-400 cursor-pointer"
+                        >
+                        <ion-icon name="eye" class="md:visible"></ion-icon>
+                    </a>
+                    @if ($ticket->status)
+                    <a
                         href="#"
                         class="text-xl px-2 hover:text-amber-400 cursor-pointer"
                         wire:click.prevent="$emitTo('edit-ticket-modal', 'editTicket', {{ $ticket->id }})"
@@ -37,6 +42,8 @@
                 @endif
             </div>
         </div>
+        
         @endforeach 
     @endif
+
 </div>

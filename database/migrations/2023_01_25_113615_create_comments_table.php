@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('content');
             $table->foreignId('ticket_id')
-            ->constrained()
+                ->constrained()
                 ->onDelete('cascade');
             $table->morphs('commentable');
             $table->timestamps();

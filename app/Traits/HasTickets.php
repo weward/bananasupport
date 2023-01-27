@@ -6,7 +6,8 @@ use App\Models\Ticket;
 
 trait HasTickets 
 {
-        
+    public $ticket;
+
     /**
      * Get Ticket Record
      * 
@@ -19,5 +20,16 @@ trait HasTickets
     public function getRecord($id)
     {
         return Ticket::id($id)->first();
+    }
+
+    public function loadCommentRelationships()
+    {
+        if (isset($this->ticket) && $this->ticket) {
+            $this->ticket->load([
+                'reporter',
+                'comments',
+                'comments.commentable'
+            ]);
+        }
     }
 }

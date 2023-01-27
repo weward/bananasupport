@@ -30,6 +30,10 @@ class NewTicketModal extends Component
             $this->toggleTicketModal('New', 0);
             // Update the table 
             $this->emitTo('tickets', 'tableUpdated');
+
+            if (url()->current() != route('livewire.tickets')) {
+                return redirect()->route('livewire.tickets');
+            }
         }
     }
 

@@ -46,6 +46,8 @@
         </div>
 
         @stack('modals')
-
+        
+        @stack('commands')
+        
     </body>
 </html>
