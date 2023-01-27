@@ -75,7 +75,7 @@
 
             @if ($ticket->status)
             <div class="my-6">
-                <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-4 border-t-amber-200 bg-gray-50">
+                <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-4 border-t-amber-200 bg-white">
                     <h3 class="text-lg flex justify-between">
                         Reply
                         <div>
