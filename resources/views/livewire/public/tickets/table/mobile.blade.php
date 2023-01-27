@@ -37,7 +37,13 @@
 							>
 							<ion-icon name="create" class="visible"></ion-icon>
 						</a>
-                        <span class="text-lg pl-6 hover:text-amber-400 cursor-pointer"><ion-icon name="trash" class="visible"></ion-icon></span>
+                        <a 
+							href="#"
+							class="text-lg pl-6 hover:text-amber-400 cursor-pointer"
+							wire:click.prevent="$emitTo('delete-ticket-modal', 'deleteTicket', {{ $ticket->id }})"
+							>
+							<ion-icon name="trash" class="visible"></ion-icon>
+						</a>
 						@endif
                     </td>
 				</tr>

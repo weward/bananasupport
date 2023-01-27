@@ -1,7 +1,5 @@
 <div >
     
-    
-
     <x-slot name="header">
         <h2 class="flex justify-between font-semibold text-xl text-gray-800 leading-tight">
             <span class="self-center">
@@ -41,5 +39,6 @@
     </div>
 
     @livewire('edit-ticket-modal')
+    @livewire('delete-ticket-modal')
     
 </div>

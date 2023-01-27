@@ -29,7 +29,13 @@
                         >
                         <ion-icon name="create" class="md:visible"></ion-icon>
                     </a>
-                    <span class="text-xl px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="trash" class="md:visible"></ion-icon></span>
+                    <a
+                        href="#"
+                        class="text-xl px-2 hover:text-amber-400 cursor-pointer"
+                        wire:click.prevent="$emitTo('delete-ticket-modal', 'deleteTicket', {{ $ticket->id }})"
+                        >
+                        <ion-icon name="trash" class="md:visible"></ion-icon>
+                    </a>
                     @endif
                 </div>
                 <div class="text-bold text-md text-gray-900 truncate text-right">
