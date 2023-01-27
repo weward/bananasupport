@@ -5,10 +5,11 @@
             <span class="self-center">
                 {{ __($title) }}
             </span>
-
+            @if (! auth()->guard('admin')->check())
             <div class="visible sm:invisible">
                 @livewire('new-ticket-modal')
             </div>
+            @endif
         </h2>
     </x-slot>
 

@@ -27,7 +27,9 @@ trait HasTickets
         if (isset($this->ticket) && $this->ticket) {
             $this->ticket->load([
                 'reporter',
-                'comments',
+                'comments' => function($query) {
+                    $query->orderBy('created_at', 'asc');
+                },
                 'comments.commentable'
             ]);
         }

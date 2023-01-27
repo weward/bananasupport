@@ -29,7 +29,7 @@
 							class="text-lg px-6 pr-6 hover:text-amber-400 cursor-pointer">
 							<ion-icon name="eye" class="visible"></ion-icon>
 						</a>
-						@if ($ticket->status)
+						@if ($ticket->status && ! auth()->guard('admin')->check())
                         <a 
 							href="#" 
 							class="text-lg px-3 hover:text-amber-400 cursor-pointer" 

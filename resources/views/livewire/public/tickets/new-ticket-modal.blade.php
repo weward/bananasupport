@@ -26,7 +26,12 @@
                     <!-- Token Name -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="subject" class="text-left" value="{{ __('Subject') }}"/>
-                        <x-jet-input id="subject" type="text" class="mt-1 block w-full" wire:model.defer="formData.subject" autofocus />
+                        <x-jet-input 
+                            id="subject" 
+                            type="text" 
+                            class="mt-1 block w-full"
+                            wire:model.defer="formData.subject" 
+                            autofocus />
                         <x-jet-input-error for="formData.subject" class="mt-2 text-left" />
                     </div>
 

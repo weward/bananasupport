@@ -126,7 +126,9 @@ class Ticket extends Model
     public function scopeByAuth($query)
     {
         // If user, restrict to own tickets
-        $user = auth()->guard('web')->user();
+        // $user = auth()->guard('web')->user();
+        $user = auth()->guard('web')->check();
+
 
         $query->when($user, function($q) use ($user) {
             $q->owner($user->id);

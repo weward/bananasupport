@@ -16,12 +16,16 @@
             <div class="grid content-between min-w-fit">
                 <div class="p-1 text-sm text-gray-600 text-right hover:bg-gray-100 h-fit rounded-lg ">
                     <a 
-                        href="{{ route('livewire.tickets.show', $ticket->id) }}" 
+                        href="@if(auth()->guard('admin')->check()) 
+                            {{ route('admin.livewire.tickets.show', $ticket->id) }}
+                            @else 
+                            {{ route('livewire.tickets.show', $ticket->id) }} 
+                            @endif" 
                         class="text-xl px-2 hover:text-amber-400 cursor-pointer"
                         >
                         <ion-icon name="eye" class="md:visible"></ion-icon>
                     </a>
-                    @if ($ticket->status)
+                    @if ($ticket->status && ! auth()->guard('admin')->check())
                     <a
                         href="#"
                         class="text-xl px-2 hover:text-amber-400 cursor-pointer"
@@ -29,6 +33,7 @@
                         >
                         <ion-icon name="create" class="md:visible"></ion-icon>
                     </a>
+                        
                     <a
                         href="#"
                         class="text-xl px-2 hover:text-amber-400 cursor-pointer"

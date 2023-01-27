@@ -9,6 +9,8 @@ trait HasNavigation
 {
     public function goToRoute($route= "dashboard")
     {
+        $route = (auth()->guard('admin')->check()) ? "admin.{$route}" : $route;
+        
         return redirect()->route($route);
     }
 }

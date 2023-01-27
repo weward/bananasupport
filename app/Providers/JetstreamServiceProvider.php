@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,16 +30,23 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
-        Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->email)->first();
+        // Fortify::authenticateUsing(function (Request $request) {
 
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-            ) {
-                return $user;
-            }
-        });
+        //     $admin = Admin::where('email', $request->email)->first();
+            
+        //     if ($admin && 
+        //         Hash::check($request->password, $admin->password)) {
+
+        //         return $admin;
+        //     }
+
+        //     $user = User::where('email', $request->email)->first();
+
+        //     if ($user &&
+        //         Hash::check($request->password, $user->password)) {
+        //         return $user;
+        //     }
+        // });
     }
 
     /**
