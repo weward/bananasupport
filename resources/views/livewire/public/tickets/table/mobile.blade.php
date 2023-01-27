@@ -23,11 +23,17 @@
 					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3">
 						<span class="text-xs ">{{ $ticket->readable_updated_at }}</span>
                     </td>
-					<td class="flex text-sm border-grey-light border hover:bg-gray-100 pt-2 text-gray-600 hover:text-amber-600 hover:font-medium cursor-pointer justify-start">
-                        <span class="text-lg px-2 pr-6 hover:text-amber-400 cursor-pointer"><ion-icon name="eye" class="visible"></ion-icon></span>
+					<td class="flex text-sm border-grey-light border hover:bg-gray-100 pt-2 text-gray-600 hover:font-medium cursor-pointer justify-start">
+                        <span class="text-lg px-6 pr-6 hover:text-amber-400 cursor-pointer"><ion-icon name="eye" class="visible"></ion-icon></span>
 						@if ($ticket->status)
-                        <span class="text-lg px-2 pr-6 hover:text-amber-400 cursor-pointer"><ion-icon name="create" class="visible"></ion-icon></span>
-                        <span class="text-lg px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="trash" class="visible"></ion-icon></span>
+                        <a 
+							href="#" 
+							class="text-lg px-3 hover:text-amber-400 cursor-pointer" 
+							wire:click.prevent="$emitTo('edit-ticket-modal', 'editTicket', {{ $ticket->id }})" 
+							>
+							<ion-icon name="create" class="visible"></ion-icon>
+						</a>
+                        <span class="text-lg pl-6 hover:text-amber-400 cursor-pointer"><ion-icon name="trash" class="visible"></ion-icon></span>
 						@endif
                     </td>
 				</tr>
