@@ -32,7 +32,12 @@ class ViewTicket extends Component
             'commentable_type' => ($isAdmin) ? Admin::class : User::class,
         ]);
 
+        
         $this->ticket->comments()->save($newComment);
+        // remove from cache
+        $this->clearDataFromCache();
+        // re-add to cache
+        $this->ticket = $this->getRecord($this->ticket->id);
 
         $this->resetForm();
         $this->render();

@@ -35,6 +35,8 @@ class DeleteTicketModal extends Component
 
         $this->ticket = null;
 
+        $this->clearDataFromCache($id);
+
         $this->toggleTicketModal('Delete', 0);
         $this->emitTo('tickets', 'tableUpdated');
 

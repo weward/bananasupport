@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Cache;
 
 trait HasTickets 
 {
@@ -19,7 +20,11 @@ trait HasTickets
      */
     public function getRecord($id)
     {
-        return Ticket::id($id)->first();
+        $cacheKey = "ticket-{$id}";
+
+        return Cache::rememberForever($cacheKey, function () use ($id) {
+            return Ticket::id($id)->first();
+        });
     }
 
     public function loadCommentRelationships()
@@ -32,6 +37,22 @@ trait HasTickets
                 },
                 'comments.commentable'
             ]);
+        }
+    }
+    
+    /**
+     * Clear Ticket Data from Cache
+     *
+     * @param  mixed $ticketId
+     * @return void
+     */
+    public function clearDataFromCache($ticketId = false)
+    {
+        $ticketId = $ticketId ?: $this->ticket->id;
+        $cacheKey = "ticket-{$ticketId}";
+
+        if (Cache::has($cacheKey)) {
+            Cache::forget($cacheKey);
         }
     }
 }

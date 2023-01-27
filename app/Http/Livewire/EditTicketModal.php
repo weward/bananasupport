@@ -46,6 +46,7 @@ class EditTicketModal extends Component
         ]);
 
         if ($ticket) {
+            $this->clearDataFromCache($this->ticket->id);
             // hide modal
             $this->toggleTicketModal('Edit', 0);
             $this->resetForm();

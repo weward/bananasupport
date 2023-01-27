@@ -5,6 +5,7 @@ use App\Http\Controllers\User\TicketController;
 use App\Http\Livewire\Tickets;
 use App\Http\Livewire\ViewTicket;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,20 +20,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::bind('ticket', function($ticket) {
-    return Ticket::findOrFail($ticket);
+    return Cache::rememberForever("ticket-{$ticket}", function () use ($ticket) {
+        return Ticket::findOrFail($ticket);
+    });
 });
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/admin/login', function () {
-//     return view('admin.auth.login');
-// })->name('admin.login');
-
-Route::middleware('admin:admin')->group(function() {
-    Route::get('/admin/login', [AdminController::class, 'loginForm']);
-    Route::post('/admin/login', [AdminController::class, 'store'])->name('admin.login');
+Route::prefix('admin')->middleware('admin:admin')->group(function() {
+    Route::get('/', [AdminController::class, 'loginForm']);
+    Route::get('login', [AdminController::class, 'loginForm']);
+    Route::post('login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 /**
@@ -43,7 +43,7 @@ Route::prefix('admin')->middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
     })->name('admin.dashboard');
 
@@ -60,22 +60,11 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
     Route::get('tickets', Tickets::class)->name('livewire.tickets');
     Route::get('tickets/{ticket}', ViewTicket::class)->name('livewire.tickets.show');
-    
-    // /**
-    //  * Admin Routes
-    //  */
-    // Route::prefix('admin')->group(function() {
-    //     Route::get('/', function() {
-    //         dd('admin dashboard');
-    //     });
-    //     Route::get('tickets', Tickets::class)->name('admin.livewire.tickets');
-    //     Route::get('tickets/{ticket}', ViewTicket::class)->name('admin.livewire.tickets.show');
-    // });
 
 });
