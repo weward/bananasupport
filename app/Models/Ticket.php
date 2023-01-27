@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\ByAuthScope;
 use App\Traits\HasReadableDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,10 +14,11 @@ class Ticket extends Model
 
     protected $table = "tickets";
 
+    
     protected $with = [
         "reporter",
     ];
-
+    
     protected $appends = [
         'id_label',
         'readable_created_at',
@@ -24,11 +26,22 @@ class Ticket extends Model
         'status_label',
         'has_been_updated',
     ];
-
+    
     protected $dates = [
         'created_at',
         'updated_at',
     ];
+    
+    protected $guarded = [];
+    
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        // Fetch tickets by User type (User | Admin)
+        static::addGlobalScope(new ByAuthScope);
+    }
 
     /**
      * Get the ticket's reporter
@@ -100,16 +113,34 @@ class Ticket extends Model
         $status = ($status == 'closed') ? 0 : 1;
         $query->where('status', $status);
     }
-    
+        
+    /**
+     * Filter Tickets by Auth Type
+     * User vs Admin
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public function scopeByAuth($query)
+    {
+        // If user, restrict to own tickets
+        $user = auth()->guard('web')->user();
+
+        $query->when($user, function($q) use ($user) {
+            $q->owner($user->id);
+        });
+    }
+
     /**
      * Query Owner/author of ticket
      *
      * @param  QueryBuilder $query
      * @return void
      */
-    public function scopeOwner($query)
+    public function scopeOwner($query, $userId = '')
     {
-        $query->where('user_id', auth()->guard('web')->user()->id);
+        $userId = $userId ?: auth()->guard('web')->user()->id;
+        $query->where('user_id', $userId);
     }
     
     /**
@@ -126,11 +157,13 @@ class Ticket extends Model
                 match ($key) {
                     'status' => $query->status($value),
                     'sortBy' => $query->filterOrder($value, $params['orderBy']),
-                    'is_user' => $query->owner(),
                     default => '',
                 };
             }
         }
+
+        // Tickets for Auth User or Admin
+        // $query->byAuth();
     }
     
     /**

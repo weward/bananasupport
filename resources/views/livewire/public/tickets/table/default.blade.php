@@ -16,15 +16,28 @@
             <div class="grid content-between min-w-fit">
                 <div class="p-1 text-sm text-gray-600 text-right hover:bg-gray-100 h-fit rounded-lg ">
                     <span class="text-xl px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="eye" class="md:visible"></ion-icon></span>
-                    <span class="text-xl px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="create" class="md:visible"></ion-icon></span>
+                    @if ($ticket->status)
+                    <a 
+                        href="#"
+                        class="text-xl px-2 hover:text-amber-400 cursor-pointer"
+                        wire:click.prevent="$emitTo('edit-ticket-modal', 'editTicket', {{ $ticket->id }})"
+                        >
+                        <ion-icon 
+                            name="create" 
+                            class="md:visible">
+                        </ion-icon>
+                    </a>
                     <span class="text-xl px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="trash" class="md:visible"></ion-icon></span>
+                    @endif
                 </div>
                 <div class=" text-bold text-md text-gray-900 truncate text-right">
                     <span class='p-1 px-2 rounded-lg text-xs text-white {{ $ticket->status ? "bg-green-400" : "bg-red-400" }}'>{{ $ticket->status_label }}</span>
                 </div>
+                @if ($ticket->has_been_updated)
                 <div class=" text-bold text-md text-gray-900 truncate text-right">
                     <span class="text-xs text-gray-600 italic">Last Updated: {{ $ticket->readable_updated_at }}</span>
                 </div>
+                @endif
             </div>
         </div>
         @endforeach 

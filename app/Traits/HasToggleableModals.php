@@ -5,16 +5,28 @@ namespace App\Traits;
 
 trait HasToggleableModals
 {
-    public $showModal = false;
+    public $showNewModal = false;
+    public $showEditModal = false;
 
-    public function toggleNewTicketModal($show = false)
+    /**
+     * Toggle Modal
+     *
+     * @param  strintg  $module
+     * @param  boolean  $show
+     * @return void
+     */
+    public function toggleTicketModal($module = 'New', $show = false)
     {
         if (method_exists($this, 'resetForm')) {
-            $this->resetForm();
+            if ($module == 'new') {
+                $this->resetForm();
+            }
         }
 
-        $this->showModal = $show;
-    }
+        $modal = "show{$module}Modal";
 
+        $this->{$modal} = $show;
+        
+    }
 
 }

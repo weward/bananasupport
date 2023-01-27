@@ -25,8 +25,10 @@
                     </td>
 					<td class="flex text-sm border-grey-light border hover:bg-gray-100 pt-2 text-gray-600 hover:text-amber-600 hover:font-medium cursor-pointer justify-start">
                         <span class="text-lg px-2 pr-6 hover:text-amber-400 cursor-pointer"><ion-icon name="eye" class="visible"></ion-icon></span>
+						@if ($ticket->status)
                         <span class="text-lg px-2 pr-6 hover:text-amber-400 cursor-pointer"><ion-icon name="create" class="visible"></ion-icon></span>
                         <span class="text-lg px-2 hover:text-amber-400 cursor-pointer"><ion-icon name="trash" class="visible"></ion-icon></span>
+						@endif
                     </td>
 				</tr>
 			</tbody>

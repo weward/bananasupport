@@ -1,15 +1,16 @@
 <div>
+    <div>
+        <x-jet-secondary-button 
+            id="new-ticket-btn"
+            wire:loading.attr="disabled"
+            class="px-4 py-2 rounded-md bg-amber-400 hover:bg-amber-200 click:text-black text-white"
+            {{-- wire:click="toggleTicketModal('New', true)"> --}}
+            wire:click="$emit('toggleTicketModal', 'New', true)">
+                {{ _('Support') }}
+        </x-jet-secondary-button>
+    </div>
 
-    <x-jet-secondary-button 
-        id="new-ticket-btn"
-        wire:loading.attr="disabled"
-        class="px-4 py-2 rounded-md bg-amber-400 hover:bg-amber-200 click:text-black"
-        wire:click="toggleNewTicketModal(true)">
-            {{ _('Support') }}
-    </x-jet-secondary-button>
-
-
-    <x-jet-dialog-modal wire:model="showModal">
+    <x-jet-dialog-modal wire:model="showNewModal">
 
         <x-slot name="content">
             
@@ -51,7 +52,7 @@
         <x-slot name="footer">
             <x-jet-secondary-button 
                 id="new-ticket-cancel"
-                wire:click="$emit('toggleNewTicketModal', false)" 
+                wire:click="$emit('toggleTicketModal', 'New', false)" 
                 wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>

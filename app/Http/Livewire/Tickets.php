@@ -14,13 +14,17 @@ class Tickets extends Component
     public $title = "Filed Tickets";
     public $description = "";
     public $perPage = 2;
-    public $isUser = false;
-    public $userId = null;
     public $showTicketsFilter = false;
 
     public $status = '';
     public $sortBy = '';
     public $orderBy = '';
+    private $tickets;
+    
+
+    protected $listeners = [
+        'tableUpdated' => 'render',
+    ];
 
     /** Livewire */
     protected $queryString = [];
@@ -31,10 +35,7 @@ class Tickets extends Component
         'orderBy' => "",
     ];
 
-    public $filterForm;
-     
-    private $tickets;
-    
+
     /**
      * Filter Tickets from Filter Form
      *
@@ -62,7 +63,8 @@ class Tickets extends Component
     }
 
     /**
-     * Fetch request params for filtering
+     * Fetch request params from the URL for filtering
+     * Access / Filter directly
      *
      * @return void
      */
@@ -74,19 +76,6 @@ class Tickets extends Component
             $this->orderBy = request()->get('orderBy') ?: '';
         }
     }
-
-    /**
-     * Check if Auth is User or Admin
-     *
-     * @return void
-     */
-    public function isUser()
-    {
-        $user = auth()->guard('web')->user();
-        $this->isUser = ($user && $user instanceof User);
-        $this->userId = $user->id;
-    }
-
         
     /**
      * Fetch All Tickets 
@@ -94,9 +83,10 @@ class Tickets extends Component
      *
      * @return void
      */
-    public function fetchTickets($fromForm = false)
+    public function fetchTickets()
     {
         $filters = $this->formFilters();
+
         return Ticket::filter($filters)
             ->when(!$this->sortBy, fn($query) => $query->latest())
             ->paginate($this->perPage)
@@ -119,17 +109,12 @@ class Tickets extends Component
             $filters['orderBy'] = $this->orderBy;
         }
 
-        if ($this->isUser) {
-            $filters['is_user'] = $this->isUser;
-        }
-
         return $filters;
     }
 
     public function queryParameters()
     {
         $formFilters = $this->formFilters();
-        unset($formFilters['is_user']);
 
         return $formFilters;
     }
@@ -145,8 +130,6 @@ class Tickets extends Component
 
     public function mount()
     {
-        // Keep In order
-        $this->isUser();
         $this->fetchRequestParameters();
     }
 

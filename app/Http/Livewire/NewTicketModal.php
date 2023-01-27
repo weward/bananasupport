@@ -3,34 +3,16 @@
 namespace App\Http\Livewire;
 
 use App\Models\Ticket;
+use App\Traits\HasTicketForm;
 use App\Traits\HasToggleableModals;
 use Livewire\Component;
 
 class NewTicketModal extends Component
 {
-    use HasToggleableModals;
+    use HasToggleableModals, HasTicketForm;
 
     protected $listeners = [
-        'toggleNewTicketModal' => 'toggleNewTicketModal',
-    ];
-
-    public $default = [
-        'subject' => '',
-        'content' => '',
-    ];
-
-    public $formData;
-
-    protected $rules = [
-        'formData.subject' => 'required|min:2',
-        'formData.content' => 'required|min:2'
-    ];
-
-    protected $messages = [
-        'formData.subject.required' => 'Please provide a subject',
-        'formData.subject.min'      => 'Subject is too short. Please make it longer.',
-        'formData.content.required' => 'Please provide a content',
-        'formData.content.min'      => 'Content is too short. Please make it longer.',
+        'toggleTicketModal'
     ];
 
     public function createNewTicket()
@@ -45,15 +27,10 @@ class NewTicketModal extends Component
 
         if ($ticket) {
             $this->resetForm();
-            $this->toggleNewTicketModal();
+            $this->toggleTicketModal('New', 0);
+            // Update the table 
+            $this->emitTo('tickets', 'tableUpdated');
         }
-    }
-
-    public function resetForm()
-    {
-        $this->resetValidation();
-
-        $this->formData = $this->default;
     }
 
     public function render()
