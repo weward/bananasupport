@@ -1,7 +1,7 @@
 <div>
     <div class="w-full">
         <div class="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
-            <div class="md:p-12 mt-3 m-b-3 border bg-amber-50 hover:bg-amber-100">
+            <div class="md:p-12 mt-3 m-b-3 bg-amber-50 rounded-lg border border-t-8 border-t-amber-300">
                 <div class="p-6">
                     <div class="">
                         <div class="flex justify-between font-extrabold text-md text-gray-600">
