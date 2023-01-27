@@ -1,7 +1,7 @@
 <div class="w-full">
     @if ($tickets->count())
         @foreach ($tickets as $ticket)
-        <div class="flex justify-between p-6 mt-3 m-b-3 rounded-lg border hover:bg-amber-50 hover:cursor-pointer 
+        <div class="flex justify-between p-6 mt-3 m-b-3 rounded-lg border hover:bg-gray-100 hover:cursor-pointer 
             @if ($ticket->status) {{ 'border-l-4 border-l-green-200' }} @else {{ 'border-l-4 border-l-red-200' }} @endif
             ">
             <div class="lg:w-5/6 w-4/5">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="grid content-between min-w-fit">
-                <div class="p-1 text-sm text-gray-600 text-right hover:bg-gray-100 h-fit rounded-lg ">
+                <div class="p-1 text-sm text-gray-600 text-right hover:bg-gray-50 h-fit rounded-lg ">
                     <a 
                         href="@if(auth()->guard('admin')->check()) 
                             {{ route('admin.livewire.tickets.show', $ticket->id) }}

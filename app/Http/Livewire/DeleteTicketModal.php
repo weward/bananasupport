@@ -30,7 +30,7 @@ class DeleteTicketModal extends Component
 
     public function destroyTicket($id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = $this->getRecord($id);
         $ticket->delete();
 
         $this->ticket = null;

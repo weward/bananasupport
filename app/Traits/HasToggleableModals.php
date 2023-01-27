@@ -8,6 +8,7 @@ trait HasToggleableModals
     public $showNewModal = false;
     public $showEditModal = false;
     public $showDeleteModal = false;
+    public $showCloseModal = false;
 
     /**
      * Toggle Modal

@@ -41,5 +41,7 @@
 
     @livewire('edit-ticket-modal')
     @livewire('delete-ticket-modal')
+    @livewire('close-ticket-modal')
+    
     
 </div>

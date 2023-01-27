@@ -20,6 +20,10 @@ class ViewTicket extends Component
     
     public $ticket;
 
+    protected $listeners = [
+        'refresh' => 'render',
+    ];
+
     public function createNewComment()
     {
         $this->validate();

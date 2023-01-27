@@ -1,14 +1,14 @@
 @if ($tickets->count())
 	<div class="container">
     @foreach ($tickets as $ticket)
-		<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+		<table class="w-full flex flex-row flex-no-wrap border border-t-2 border-t-amber-200 sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
 			<thead class="text-gray-500">
                 <tr class="bg-gray-100 flex flex-col flex-no wrap rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-					<th class="p-3 text-sm text-left border-b border-gray-50">Subject</th>
-					<th class="p-3 text-sm text-left border-b border-gray-50">status</th>
-					<th class="p-3 text-sm text-left border-b border-gray-50">Created</th>
-					<th class="p-3 text-sm text-left border-b border-gray-50">Updated</th>
-					<th class="p-3 text-sm text-left border-b border-gray-50" width="110px">Actions</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Subject</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">status</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Created</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Updated</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50" width="10px">Actions</th>
 				</tr>
 			</thead>
 			<tbody class="flex-auto sm:flex-none w-full">

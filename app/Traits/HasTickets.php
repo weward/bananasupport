@@ -18,7 +18,7 @@ trait HasTickets
      * @param  int $id
      * @return App\Models\Ticket
      */
-    public function getRecord($id)
+    public function getRecord($id, $shouldCache = true)
     {
         $cacheKey = "ticket-{$id}";
 

@@ -1,7 +1,7 @@
 <div>
     <div class="w-full">
         <div class="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
-            <div class="md:p-12 mt-3 m-b-3 bg-amber-50 rounded-lg border border-t-4 border-t-amber-200">
+            <div class="md:p-12 mt-3 m-b-3 bg-gray-50 rounded-lg border border-t-4 border-t-amber-200">
                 <div class="p-6">
                     <div class="">
                         <div class="flex justify-between font-extrabold text-md text-gray-600">
@@ -32,6 +32,21 @@
                 </div>
             </div>
 
+            @if ($ticket->status)
+            <div class="max-w-7xl mx-auto px-1 my-6">
+                <div class="flex justify-center p-3 mt-3 m-b-3">
+                    <x-jet-secondary-button 
+                        id="close-ticket-toggle"
+                        class="ml-3 font-bold"
+                        wire:click="$emitTo('close-ticket-modal', 'closeTicket', {{ $ticket->id }})"
+                        wire:ignoer.self
+                        wire:loading.attr="disabled">
+                        {{ __('Close Ticket ?') }}
+                    </x-jet-secondary-button>
+                </div>
+            </div>
+            @endif
+
             <div class="">
             @if ($ticket->comments->count())
                 @foreach ($ticket->comments as $comment)
@@ -61,7 +76,19 @@
             @if ($ticket->status)
             <div class="my-6">
                 <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-4 border-t-amber-200 bg-gray-50">
-                    <h3 class="text-lg">Reply</h3>
+                    <h3 class="text-lg flex justify-between">
+                        Reply
+                        <div>
+                            <x-jet-secondary-button 
+                                id="close-ticket-toggle-bottom"
+                                class="ml-3 font-bold"
+                                wire:click="$emitTo('close-ticket-modal', 'closeTicket', {{ $ticket->id }})"
+                                wire:ignoer.self
+                                wire:loading.attr="disabled">
+                                {{ __('Close Ticket ?') }}
+                            </x-jet-secondary-button>
+                        </div>
+                    </h3>
                     <div>
                         <x-jet-form-section submit="viewTicket"  class="text-center">
                             <x-slot name="form">
@@ -71,7 +98,7 @@
                                         id="view-ticket-content" 
                                         rows="5"
                                         class="mt-6 block w-full rounded-md shadow-sm"
-                                        autofocus
+                                        {{-- autofocus --}}
                                         wire:model.defer="formData.content">
                                     </textarea>
                                     <x-jet-input-error for="formData.content" class="mt-2 text-left text-red-500" />
@@ -103,15 +130,16 @@
             @endif
 
         </div>
-   
+
+        @livewire('close-ticket-modal')
+
     </div>
  
     @push('commands')
-    <div 
+    {{-- <div 
         x-data
         x-init="window.scrollTo({top: 10000000, behavior: 'smooth'})"
         class="">
-    </div>
+    </div> --}}
     @endpush
-
 </div>
