@@ -1,7 +1,7 @@
 <div>
     <div class="w-full">
         <div class="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
-            <div class="md:p-12 mt-3 m-b-3 bg-amber-50 rounded-lg border border-t-8 border-t-amber-300">
+            <div class="md:p-12 mt-3 m-b-3 bg-amber-50 rounded-lg border border-t-4 border-t-amber-200">
                 <div class="p-6">
                     <div class="">
                         <div class="flex justify-between font-extrabold text-md text-gray-600">
@@ -60,7 +60,7 @@
 
             @if ($ticket->status)
             <div class="my-6">
-                <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-8 border-t-amber-300 bg-gray-50">
+                <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-4 border-t-amber-200 bg-gray-50">
                     <h3 class="text-lg">Reply</h3>
                     <div>
                         <x-jet-form-section submit="viewTicket"  class="text-center">
@@ -89,7 +89,7 @@
 
                             <x-jet-button  
                                 id="view-ticket-submit"
-                                class="text-md bg-amber-400 hover:bg-amber-200"
+                                class="text-md text-gray-900 bg-amber-200 hover:bg-amber-100 "
                                 wire:click="createNewComment" 
                                 wire:ignoer.self
                                 wire:loading.attr="disabled">

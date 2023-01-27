@@ -50,6 +50,11 @@
         </div>
         
         @endforeach 
+    @else 
+        <div class="text-center">
+            <p class="text=sm text-gray-600 italic">There are no tickets.</p>
+        </div>
+
     @endif
 
 </div>

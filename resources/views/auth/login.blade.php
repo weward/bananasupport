@@ -48,7 +48,7 @@
                                 {{ __('Register') }}
                             </a>
                         @endif
-                        <x-jet-button class="ml-4 bg-amber-200 hover:bg-amber-400 text-black">
+                        <x-jet-button class="ml-4 bg-amber-200 hover:bg-amber-100 text-black">
                             {{ __('Log in') }}
                         </x-jet-button>
                     </div>

@@ -6,17 +6,15 @@
         wire:loading.attr="disabled"
         class="px-4 py-2 rounded-md text-xl hover:bg-gray-200 hover:text-white click:text-black"
         wire:click="goToRoute('livewire.tickets')">
-            {{-- {{ _('Reset') }} --}}
             <ion-icon name="refresh" class="visible"></ion-icon>
     </x-jet-secondary-button>
         
     <x-jet-secondary-button 
         id="show-ticket-filter-btn"
         wire:loading.attr="disabled"
-        class="px-4 py-2 rounded-md text-xl text-white bg-amber-400 hover:bg-amber-200 hover:text-gray-900 click:text-black"
+        class="px-4 py-2 rounded-md text-xl bg-amber-200 hover:bg-amber-100 hover:text-gray-900 click:text-black"
         wire:click="$toggle('showTicketsFilter')">
-            {{-- @if (! $showTicketsFilter) {{ _('Filter') }} @else  {{ _('Close') }} @endif  --}}
-            @if (! $showTicketsFilter) <ion-icon name="switch" class="visible"></ion-icon> @else  <ion-icon name="close" class="visible"></ion-icon>  @endif 
+            @if (! $showTicketsFilter) <ion-icon name="funnel" class="visible"></ion-icon> @else  <ion-icon name="close" class="visible"></ion-icon>  @endif 
     </x-jet-secondary-button>
     
 
@@ -85,7 +83,7 @@
                 id="hide-ticket-filter-btn"
                 wire:click="filterTickets"
                 wire:loading.attr="disabled"
-                class="ml-2 px-4 py-2 rounded-md text-white bg-amber-400 hover:bg-amber-200 hover:text-gray-900 click:text-black">
+                class="ml-2 px-4 py-2 rounded-md bg-amber-200 hover:bg-amber-100 hover:text-gray-900 click:text-black">
                     {{ _('Filter') }}
             </x-jet-secondary-button>
         </div>
