@@ -98,7 +98,7 @@
                                         id="view-ticket-content" 
                                         rows="5"
                                         class="mt-6 block w-full rounded-md shadow-sm"
-                                        {{-- autofocus --}}
+                                        autofocus
                                         wire:model.defer="formData.content">
                                     </textarea>
                                     <x-jet-input-error for="formData.content" class="mt-2 text-left text-red-500" />
@@ -134,12 +134,5 @@
         @livewire('close-ticket-modal')
 
     </div>
- 
-    @push('commands')
-    {{-- <div 
-        x-data
-        x-init="window.scrollTo({top: 10000000, behavior: 'smooth'})"
-        class="">
-    </div> --}}
-    @endpush
+
 </div>

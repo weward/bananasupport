@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\User\TicketController;
 use App\Http\Livewire\Tickets;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\ViewTicket;
@@ -45,7 +44,9 @@ Route::prefix('admin')->middleware('admin:admin')->group(function() {
 });
 
 /**
- * Admin Routes
+ * =============================
+ *  Admin Routes
+ * =============================
  */
 Route::prefix('admin')->middleware([
     'auth:sanctum,admin',
@@ -64,7 +65,9 @@ Route::prefix('admin')->middleware([
 
 
 /**
- * User Routes
+ * =============================
+ *  User Routes
+ * =============================
  */
 Route::middleware([
     'auth:sanctum',

@@ -28,8 +28,20 @@ class TicketFactory extends Factory
         return [
             'subject' => fake()->realText(50, 1),
             'content' => fake()->realText(200, 2),
-            'user_id' => $this->assignUser(),
+            'user_id' => User::factory(),
+            // 'user_id' => $this->assignUser(),
         ];
+    }
+
+    public function randomState()
+    {
+        $likeliness = rand(0, 100);
+
+        if ($likeliness > 65) {
+            return $this->open();
+        }
+
+        return $this->closed();
     }
 
     public function closed()

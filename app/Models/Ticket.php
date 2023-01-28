@@ -187,6 +187,10 @@ class Ticket extends Model
                 };
             }
         }
+
+        if (!in_array('sortBy', $params)) {
+            $query->orderBy('created_at', 'DESC');
+        }
     }
     
     /**
