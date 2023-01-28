@@ -45,7 +45,7 @@ class TicketsTest extends TestCase
     function tickets_page_render_right_view_file()
     {
         $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->count(4)->create();
+        Ticket::factory()->count(4)->create();
 
         Livewire::test(Tickets::class)
             ->call('render')
