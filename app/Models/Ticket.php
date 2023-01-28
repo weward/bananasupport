@@ -82,6 +82,27 @@ class Ticket extends Model
         $query->where('user_id', $userId);
     }
 
+    public function scopeTicket($query, $value)
+    {
+        $id = substr($value, 5); // remote year
+        $id = ltrim($id, "0");  // Remote prepended zeroes
+
+        $query->where('id', $id);
+    }
+    
+    
+    /**
+     * Search
+     *
+     * @param  QueryBuiilder $query
+     * @param  string       $value
+     * @return void
+     */
+    public function scopeSearch($query, $value = '')
+    {
+        $query->ticket($value);
+    }
+
     /**
      * Get all active tickets
      * 
@@ -159,6 +180,7 @@ class Ticket extends Model
         foreach ($params as $key => $value) {
             if ($value) {
                 match ($key) {
+                    'search' => $query->search($value),
                     'status' => $query->status($value),
                     'sortBy' => $query->filterOrder($value, $params['orderBy']),
                     default => '',

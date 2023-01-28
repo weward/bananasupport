@@ -31,7 +31,18 @@
 
                 <x-slot name="form">
                     <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-12 md:col-span-4 md:pr-2">
+                        <div class="col-span-12 md:col-span-3 md:pr-2">
+                            <x-jet-label for="filter-tickets-search" class="text-left" value="{{ __('Search') }}"/>
+                            <x-jet-input 
+                                id="filter-tickets-search" 
+                                type="text" 
+                                class="mt-1 block w-full"
+                                placeholder="Ticket #"
+                                wire:model.defer="search" 
+                                autofocus />
+                            <x-jet-input-error for="search" class="mt-2 text-left" />
+                        </div>
+                        <div class="col-span-12 md:col-span-3 md:pr-2">
                             <x-jet-label for="filter-tickets-status" class="text-left" value="{{ __('Status') }}"/>
                             <select 
                                 id="filter-tickets-status"
@@ -45,7 +56,7 @@
                             <x-jet-input-error for="status" class="mt-2 text-left" />
                         </div>
 
-                        <div class="col-span-12 md:col-span-4 md:pl-2 md:pr-2">
+                        <div class="col-span-12 md:col-span-3 md:pl-2 md:pr-2">
                             <x-jet-label for="filter-tickets-sort" class="text-left" value="{{ __('Sort By') }}"/>
                             <select 
                                 id="filter-tickets-sort"
@@ -58,7 +69,7 @@
                             <x-jet-input-error for="sortBy" class="mt-2 text-left" />
                         </div>
 
-                        <div class="col-span-12 md:col-span-4 md:pl-2">
+                        <div class="col-span-12 md:col-span-3 md:pl-2">
                             <x-jet-label for="filter-tickets-sort-order" class="text-left" value="{{ __('Order') }}"/>
                             <select 
                                 id="filter-tickets-sort-order"

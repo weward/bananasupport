@@ -30,18 +30,9 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
+        // customize User Login
         // Fortify::authenticateUsing(function (Request $request) {
-
-        //     $admin = Admin::where('email', $request->email)->first();
-            
-        //     if ($admin && 
-        //         Hash::check($request->password, $admin->password)) {
-
-        //         return $admin;
-        //     }
-
         //     $user = User::where('email', $request->email)->first();
-
         //     if ($user &&
         //         Hash::check($request->password, $user->password)) {
         //         return $user;

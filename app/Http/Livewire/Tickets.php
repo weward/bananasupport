@@ -18,6 +18,7 @@ class Tickets extends Component
     public $perPage = 10;
     public $showTicketsFilter = false;
 
+    public $search = '';
     public $status = '';
     public $sortBy = '';
     public $orderBy = '';
@@ -32,6 +33,7 @@ class Tickets extends Component
     protected $queryString = [];
 
     public $defaultFilters = [
+        'search' => '',
         'status' => '',
         'sortBy' => '',
         'orderBy' => "",
@@ -73,6 +75,7 @@ class Tickets extends Component
     public function fetchRequestParameters()
     {
         if (count($_GET)) {
+            $this->search = request()->get('search') ?: '';
             $this->status = request()->get('status') ?: '';
             $this->sortBy = request()->get('sortBy') ?: '';
             $this->orderBy = request()->get('orderBy') ?: '';
@@ -99,6 +102,10 @@ class Tickets extends Component
     public function formFilters()
     {
         $filters = [];
+        if ($this->search != '') {
+            $filters['search'] = $this->search;
+        }
+
         if ($this->status != '') {
             $filters['status'] = $this->status;
         }
