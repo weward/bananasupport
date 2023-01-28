@@ -1,32 +1,32 @@
 <div>
     <div class="w-full">
         <div class="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
-            <div class="md:p-12 mt-3 m-b-3 bg-gray-50 rounded-lg border border-t-4 border-t-amber-200">
+            <div class="md:p-1 md:px-12 mt-3 m-b-3 bg-gray-50 rounded-lg border border-t-4 border-t-amber-200">
                 <div class="p-6">
                     <div class="">
-                        <div class="flex justify-between font-extrabold text-md text-gray-600">
+                        <div class="flex justify-between font-extrabold text-xs text-gray-600">
                             Ticket #
 
-                            <div class='p-2 px-4 rounded-lg text-sm text-white uppercase {{ $ticket->status ? "bg-green-400" : "bg-red-400" }}'>{{ $ticket->status_label }}</div>
+                            <div class='p-1 px-2 rounded-lg text-xs text-white uppercase {{ $ticket->status ? "bg-green-400" : "bg-red-400" }}'>{{ $ticket->status_label }}</div>
                             
                         </div>
                         <div class="text-sm text-gray-600 italic">{{ $ticket->id_label }}</div>
 
-                        <div class="mt-2 font-extrabold text-md text-gray-600">Author</div>
-                        <div class="text-sm text-gray-600 italic">{{ $ticket->reporter?->name }}</div>
+                        <div class="mt-2 font-extrabold text-xs text-gray-600">Author</div>
+                        <div class="text-md text-gray-600 italic">{{ $ticket->reporter?->name }}</div>
 
-                        <div class="mt-2 font-extrabold text-md text-gray-600">Subject</div>
-                        <div class="text-sm text-gray-600 italic">{{ $ticket->subject }}</div>
+                        <div class="mt-2 font-extrabold text-xs text-gray-600">Subject</div>
+                        <div class="text-md text-gray-600 italic">{{ $ticket->subject }}</div>
 
-                        <div class="mt-2 font-extrabold text-md text-gray-600">Content</div>
-                        <div class="text-sm text-gray-600 italic">{!! nl2br($ticket->content) !!}</div>
+                        <div class="mt-2 font-extrabold text-xs text-gray-600">Content</div>
+                        <div class="text-md text-gray-600 italic">{!! nl2br($ticket->content) !!}</div>
 
-                        <div class="mt-2 font-extrabold text-sm text-gray-600">Created</div>
-                        <div class="text-xs text-gray-600 italic">{{ $ticket->formatted_created_at }}</div>
+                        <div class="mt-2 font-extrabold text-xs text-gray-600">Created</div>
+                        <div class="text-sm text-gray-600 italic">{{ $ticket->formatted_created_at }}</div>
                         
                         @if ($ticket->has_been_updated)
-                            <div class="mt-2 font-extrabold text-sm text-gray-600">Last Updated</div>
-                            <div class="text-xs text-gray-600 italic">{{ $ticket->readable_updated_at }}</div>                   
+                            <div class="mt-2 font-extrabold text-xs text-gray-600">Last Updated</div>
+                            <div class="text-sm text-gray-600 italic">{{ $ticket->readable_updated_at }}</div>                   
                         @endif
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         wire:click="$emitTo('close-ticket-modal', 'closeTicket', {{ $ticket->id }})"
                         wire:ignoer.self
                         wire:loading.attr="disabled">
-                        {{ __('Close Ticket ?') }}
+                        {{ __('Close Ticket') }}
                     </x-jet-secondary-button>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             @if ($ticket->comments->count())
                 @foreach ($ticket->comments as $comment)
 
-                <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border bg-gray-50 hover:bg-amber-50
+                <div class="p-6 md:px-12 pt-6 pb-6 mt-3 m-b-3 rounded-lg border bg-gray-50 hover:bg-amber-50
                     @if ($comment->is_admin) {{ 'border-l-8 border-l-gray-200' }} @else {{ 'border-l-8 border-l-amber-100' }} @endif">
                     <div class="md:px-6">
                         <div class="flex justify-between">
@@ -75,7 +75,7 @@
 
             @if ($ticket->status)
             <div class="my-6">
-                <div class="md:p-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-4 border-t-amber-200 bg-white">
+                <div class="md:px-12 p-6 pt-6 pb-6 mt-3 m-b-3 rounded-lg border border-t-4 border-t-amber-200 bg-white">
                     <h3 class="text-lg flex justify-between">
                         Reply
                         <div>
@@ -85,7 +85,7 @@
                                 wire:click="$emitTo('close-ticket-modal', 'closeTicket', {{ $ticket->id }})"
                                 wire:ignoer.self
                                 wire:loading.attr="disabled">
-                                {{ __('Close Ticket ?') }}
+                                {{ __('Close Ticket') }}
                             </x-jet-secondary-button>
                         </div>
                     </h3>

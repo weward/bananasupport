@@ -26,7 +26,12 @@ trait HasTickets
             return Ticket::id($id)->first();
         });
     }
-
+    
+    /**
+     * Load Relationships
+     *
+     * @return void
+     */
     public function loadCommentRelationships()
     {
         if (isset($this->ticket) && $this->ticket) {

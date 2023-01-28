@@ -5,7 +5,9 @@ use App\Http\Controllers\User\TicketController;
 use App\Http\Livewire\Tickets;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\ViewTicket;
+use App\Http\Livewire\ViewUser;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +25,12 @@ use Illuminate\Support\Facades\Route;
 Route::bind('ticket', function($ticket) {
     return Cache::rememberForever("ticket-{$ticket}", function () use ($ticket) {
         return Ticket::findOrFail($ticket);
+    });
+});
+
+Route::bind('user', function($user) {
+    return Cache::rememberForever("user-{$user}", function () use ($user) {
+        return User::findOrFail($user);
     });
 });
 
@@ -51,6 +59,7 @@ Route::prefix('admin')->middleware([
     Route::get('tickets', Tickets::class)->name('admin.livewire.tickets');
     Route::get('tickets/{ticket}', ViewTicket::class)->name('admin.livewire.tickets.show');
     Route::get('users', Users::class)->name('admin.livewire.users');
+    Route::get('users/{user}', ViewUser::class)->name('admin.livewire.users.show');
 });
 
 

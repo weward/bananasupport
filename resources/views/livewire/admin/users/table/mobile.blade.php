@@ -25,7 +25,7 @@
                     </td>
 					<td class="flex text-sm border-grey-light border hover:bg-gray-100 pt-2 text-gray-600 hover:font-medium cursor-pointer justify-start">
                         <a 
-							href="{{ route('admin.livewire.tickets.show', $user->id) }}" 	
+							href="{{ route('admin.livewire.users.show', $user->id) }}" 	
 							class="text-lg px-6 pr-6 hover:text-amber-400">
 							<ion-icon name="eye" class="visible"></ion-icon>
 						</a>

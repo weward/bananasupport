@@ -5,7 +5,8 @@
 			<thead class="text-gray-500">
                 <tr class="bg-gray-100 flex flex-col flex-no wrap rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Subject</th>
-					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">status</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Reporter</th>
+					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Status</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Created</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Updated</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50" width="10px">Actions</th>
@@ -14,6 +15,7 @@
 			<tbody class="flex-auto sm:flex-none w-full">
 				<tr class="flex flex-col flex-nowrap mb-2 sm:mb-0">
 					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3 truncate">{{ $ticket->subject }}</td>
+					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3">{{ $ticket->reporter->name ?? '' }}</td>
 					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3">
                         <span class='p-1 px-2 rounded-lg text-xs text-white {{ $ticket->status ? "bg-green-400" : "bg-red-400" }}'>{{ $ticket->status_label }}</span>
                     </td>
@@ -24,8 +26,13 @@
 						<span class="text-xs ">{{ $ticket->readable_updated_at }}</span>
                     </td>
 					<td class="flex text-sm border-grey-light border hover:bg-gray-100 pt-2 text-gray-600 hover:font-medium cursor-pointer justify-start">
-                        <a 
-							href="{{ route('livewire.tickets.show', $ticket->id) }}" 	
+						
+						<a 
+							@if (auth()->guard('admin')->check())
+								href="{{ route('admin.livewire.tickets.show', $ticket->id) }}" 	
+							@else
+								href="{{ route('livewire.tickets.show', $ticket->id) }}"
+							@endif
 							class="text-lg px-6 pr-6 hover:text-amber-400 cursor-pointer">
 							<ion-icon name="eye" class="visible"></ion-icon>
 						</a>

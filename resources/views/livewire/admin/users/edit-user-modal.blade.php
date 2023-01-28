@@ -55,9 +55,6 @@
 
                     <div class="">
                         <div class="text-xs italic text-gray-600">Created: {{$user->formatted_created_at ?? ''}}</div>
-                        {{-- @if ($user->has_been_updated ?? false)
-                        <div class="text-xs italic text-gray-600">Last Updated: {{$user->readable_updated_at ?? ''}}</div>
-                        @endif --}}
                     </div>
 
                 </x-slot>

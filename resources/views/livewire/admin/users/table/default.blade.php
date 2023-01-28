@@ -20,7 +20,7 @@
                     <td class="p-3"><span class='p-1 px-2 rounded-lg text-xs text-white {{ $user->active ? "bg-green-400" : "bg-gray-300" }}'>{{ $user->status_label }}</span></td>
                     <td class="p-3 text-right">
                         <a 
-                            href=""
+                            href="{{route('admin.livewire.users.show', $user->id)}}"
                             class="text-xl px-2 hover:text-amber-400 cursor-pointer"
                             >
                             <ion-icon name="eye" class="md:visible"></ion-icon>

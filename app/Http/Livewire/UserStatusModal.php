@@ -28,15 +28,18 @@ class UserStatusModal extends Component
 
     public function updateStatus($id)
     {
-        $user = $this->getRecord($id);
-        $user->active = !$user->active;
-        $user->save();
-
-        $this->user = null;
-        $this->clearDataFromCache($id);
-
-        $this->toggleModal('UserStatus', 0);
-        $this->emitTo('users', 'tableUpdated');
+        $user = $this->user->update([
+            'active' => !$this->user->active,
+        ]);
+        
+        if ($user) {
+            $this->clearDataFromCache($id);
+            $this->toggleModal('UserStatus', 0);
+    
+    
+            $this->emitTo('users', 'tableUpdated');
+            $this->emitTo('view-user', 'refresh');
+        }
     }
 
     public function render()

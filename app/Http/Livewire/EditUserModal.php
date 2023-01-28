@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Traits\HasToggleableModals;
 use App\Traits\HasUserForm;
 use App\Traits\HasUsers;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class EditUserModal extends Component
@@ -53,8 +54,9 @@ class EditUserModal extends Component
             // hide modal
             $this->resetForm();
             $this->toggleModal('EditUser', 0);
-            // Update the table 
+
             $this->emitTo('users', 'tableUpdated');
+            $this->emitTo('view-user', 'refresh');
         }
     }
 

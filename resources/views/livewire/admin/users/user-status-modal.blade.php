@@ -26,14 +26,14 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button  
+            <x-jet-button  
                 id="delete-ticket-submit"
-                class="ml-3 bg-amber-600 hover:bg-amber-200"
+                class="ml-3 bg-amber-400 hover:bg-amber-100"
                 wire:click="$emitTo('user-status-modal', 'updateStatus', {{ $user->id ?? '' }})" 
                 wire:ignoer.self
                 wire:loading.attr="disabled">
                 @if($user->active ?? ''){{ __('Deactivate') }} @else {{ __('Activate') }}@endif
-            </x-jet-danger-button>
+            </x-jet-button>
                 
         </x-slot>
         

@@ -43,4 +43,18 @@ trait HasUsers
             Cache::forget($cacheKey);
         }
     }
+
+    public function loadRelationships($limit = 0)
+    {
+        $this->user->load([
+            'tickets' => function($q) {
+                $q->orderBy('created_at', 'desc');
+            } 
+        ]);
+
+        if ($limit) {
+            $this->user->tickets = $this->user->tickets->take(10);
+        }
+    }
+
 }
