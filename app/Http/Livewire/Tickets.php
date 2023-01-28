@@ -65,8 +65,8 @@ class Tickets extends Component
      */
     public function selectSortBy()
     {
-        if ($this->sortBy == '') {
-            $this->orderBy = 'desc';
+        if ($this->orderBy == '') {
+            $this->sortBy = 'desc';
         }
     }
 
@@ -96,11 +96,11 @@ class Tickets extends Component
             $filters['status'] = $this->status;
         }
 
-        if ($this->sortBy) {
-            $filters['sortBy'] = $this->sortBy;
+        if ($this->orderBy) {
+            $filters['orderBy'] = $this->orderBy;
         }
 
-        $filters['orderBy'] = $this->orderBy ?: "DESC";
+        $filters['sortBy'] = $this->sortBy ?: "DESC";
 
         return $filters;
     }

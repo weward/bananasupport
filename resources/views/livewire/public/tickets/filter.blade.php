@@ -57,30 +57,30 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-3 md:pl-2 md:pr-2">
-                            <x-jet-label for="filter-tickets-sort" class="text-left" value="{{ __('Sort By') }}"/>
+                            <x-jet-label for="filter-tickets-sort" class="text-left" value="{{ __('Order By') }}"/>
                             <select 
                                 id="filter-tickets-sort"
-                                wire:model.defer="sortBy"
+                                wire:model.defer="orderBy"
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">
                                 <option value="">Any</option>
                                 <option value="created_at">Date Created</option>
                                 <option value="updated_at">Date Updated</option>
                             </select>
-                            <x-jet-input-error for="sortBy" class="mt-2 text-left" />
+                            <x-jet-input-error for="orderBy" class="mt-2 text-left" />
                         </div>
 
                         <div class="col-span-12 md:col-span-3 md:pl-2">
-                            <x-jet-label for="filter-tickets-sort-order" class="text-left" value="{{ __('Order') }}"/>
+                            <x-jet-label for="filter-tickets-sort-order" class="text-left" value="{{ __('Sorting') }}"/>
                             <select 
                                 id="filter-tickets-sort-order"
-                                wire:model.defer="orderBy"
+                                wire:model.defer="sortBy"
                                 wire:loading.attr="disabled"
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">
                                 <option value="">Any</option>
                                 <option value="DESC" selected>Latest First</option>
                                 <option value="ASC">Oldest First</option>
                             </select>
-                            <x-jet-input-error for="orderBy" class="mt-2 text-left" />
+                            <x-jet-input-error for="sortBy" class="mt-2 text-left" />
                         </div>
 
                     </div>

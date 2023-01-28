@@ -24,7 +24,7 @@ trait HasReadableDates
 
     public function getFormattedCreatedAtAttribute()
     {
-        return $this->created_at->copy()->setTimezone($this->timezone)->format('m/d/Y G:i A');
+        return $this->created_at->copy()->setTimezone($this->timezone)->format('m/d/Y g:i A');
     }
 
 }
