@@ -112,7 +112,7 @@ class Ticket extends Model
      */
     public function scopeStatus($query, $status)
     {
-        $status = ($status == 'closed') ? 0 : 1;
+        $status = ($status == 'closed' || $status == 0) ? 0 : 1;
         $query->where('status', $status);
     }
         

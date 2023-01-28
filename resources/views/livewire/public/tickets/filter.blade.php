@@ -32,7 +32,7 @@
                 <x-slot name="form">
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 md:col-span-4 md:pr-2">
-                            <x-jet-label for="content" class="text-left" value="{{ __('Status') }}"/>
+                            <x-jet-label for="filter-tickets-status" class="text-left" value="{{ __('Status') }}"/>
                             <select 
                                 id="filter-tickets-status"
                                 wire:model.defer="status"
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-4 md:pl-2 md:pr-2">
-                            <x-jet-label for="content" class="text-left" value="{{ __('Sort By') }}"/>
+                            <x-jet-label for="filter-tickets-sort" class="text-left" value="{{ __('Sort By') }}"/>
                             <select 
                                 id="filter-tickets-sort"
                                 wire:model.defer="sortBy"
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-4 md:pl-2">
-                            <x-jet-label for="content" class="text-left" value="{{ __('Order') }}"/>
+                            <x-jet-label for="filter-tickets-sort-order" class="text-left" value="{{ __('Order') }}"/>
                             <select 
                                 id="filter-tickets-sort-order"
                                 wire:model.defer="orderBy"

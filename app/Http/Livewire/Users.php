@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class Users extends Component
 {
-    // use WithPagination;
+    use WithPagination;
     use HasNavigation;
 
     public $title = "User Management";
@@ -17,6 +17,7 @@ class Users extends Component
     public $perPage = 10;
     public $showUsersFilter = false;
 
+    public $search = '';
     public $status = '';
     public $sortBy = '';
     public $orderBy = '';
@@ -30,6 +31,7 @@ class Users extends Component
     protected $queryString = [];
 
     public $defaultFilters = [
+        'search' => '',
         'status' => '',
         'sortBy' => '',
         'orderBy' => "",
@@ -40,7 +42,7 @@ class Users extends Component
      *
      * @return void
      */
-    public function filter()
+    public function filterUsers()
     {
         $this->fetchRecords();
         // Start monitoring Changes in URL query string 
@@ -56,6 +58,7 @@ class Users extends Component
     public function fetchRequestParameters()
     {
         if (count($_GET)) {
+            $this->search = request()->get('search') ?: '';
             $this->status = request()->get('status') ?: '';
             $this->sortBy = request()->get('sortBy') ?: '';
             $this->orderBy = request()->get('orderBy') ?: '';
@@ -81,6 +84,10 @@ class Users extends Component
     public function formFilters()
     {
         $filters = [];
+        if ($this->search != '') {
+            $filters['search'] = $this->search;
+        }
+        
         if ($this->status != '') {
             $filters['status'] = $this->status;
         }

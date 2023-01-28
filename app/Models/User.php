@@ -87,6 +87,14 @@ class User extends Authenticatable
         $query->where('id', $id);
     }
 
+    public function scopeSearch($query, $value = '')
+    {
+        $query->where(function($q) use ($value) {
+            $q->where('name', 'like', "%{$value}%");
+            $q->orWhere('email', 'like', "%{$value}%");
+        });
+    }
+
     /**
      * Get all active users
      */
@@ -108,6 +116,7 @@ class User extends Authenticatable
      */
     public function scopeStatus($query, $status)
     {
+        $status = ($status == 'inactive' || $status == 0) ? 0 : 1;
         $query->where('active', $status);
     }
 
@@ -137,6 +146,7 @@ class User extends Authenticatable
         foreach ($params as $key => $value) {
             if ($value) {
                 match ($key) {
+                    'search' => $query->search($value),
                     'status' => $query->status($value),
                     'sortBy' => $query->filterOrder($value, $params['orderBy']),
                     default => '',

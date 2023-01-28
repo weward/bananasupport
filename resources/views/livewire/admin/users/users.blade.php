@@ -14,7 +14,7 @@
 
                 @include('livewire.admin.users.filter')
                 
-                <div class="invisible max-h-0 md:visible md:max-h-max">
+                <div class="invisible mt-4 max-h-0 md:visible md:max-h-max">
 
                     @include('livewire.admin.users.table.default')
                     
@@ -35,9 +35,6 @@
     </div>
 
     
-
-    {{-- @livewire('edit-user-modal') --}}
-    {{-- @livewire('update-user-modal') --}}
     @livewire('user-status-modal')
     
     
