@@ -19,8 +19,8 @@ class Users extends Component
 
     public $search = '';
     public $active = '';
-    public $sortBy = '';
     public $orderBy = '';
+    public $sortBy = '';
     private $users;
 
     protected $listeners = [
@@ -31,15 +31,15 @@ class Users extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'active' => ['except' => ''],
-        'sortBy' => ['except' => ''],
         'orderBy' => ['except' => ''],
+        'sortBy' => ['except' => ''],
     ];
 
     public $defaultFilters = [
         'search' => '',
         'active' => '',
-        'sortBy' => '',
         'orderBy' => "",
+        'sortBy' => '',
     ];
 
     /**
@@ -79,9 +79,9 @@ class Users extends Component
             $filters['active'] = $this->active;
         }
 
-        $filters['sortBy'] = $this->sortBy != '' ? $this->sortBy : 'created_at';
+        $filters['orderBy'] = $this->orderBy != '' ? $this->orderBy : 'created_at';
         
-        $filters['orderBy'] = $this->orderBy ?: "DESC";
+        $filters['sortBy'] = $this->sortBy ?: "DESC";
         
         return $filters;
     }

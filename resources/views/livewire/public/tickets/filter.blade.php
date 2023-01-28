@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-3 md:pl-2">
-                            <x-jet-label for="filter-tickets-sort-order" class="text-left" value="{{ __('Sorting') }}"/>
+                            <x-jet-label for="filter-tickets-sort-order" class="text-left" value="{{ __('Sort By') }}"/>
                             <select 
                                 id="filter-tickets-sort-order"
                                 wire:model.defer="sortBy"

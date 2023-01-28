@@ -53,6 +53,20 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return $this
+     */
+    public function inactive(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'active' => 0,
+            ];
+        });
+    }
+
+    /**
      * Indicate that the user should have a personal team.
      *
      * @return $this

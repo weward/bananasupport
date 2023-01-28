@@ -67,6 +67,7 @@ class TicketsTest extends TestCase
             'search' => $tickets[0]->id_label
         ])
         ->test(Tickets::class)
+        ->assertSet('search', $tickets[0]->id_label)
         ->call('filterTickets')
         ->assertSee($tickets[0]->id_label);
     }
@@ -139,25 +140,6 @@ class TicketsTest extends TestCase
     }
 
     /** 
-     * Filter by search param (ticket ID)
-     * 
-     * @test 
-     * */
-    function can_filter_tickets_by_search_parameter()
-    {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
-
-        Livewire::withQueryParams([
-            'page' => 1,
-            'search' => $ticket->id_label
-        ])
-            ->test(Tickets::class)
-            ->call('filterTickets')
-            ->assertSet('search', $ticket->id_label);
-    }
-
-    /** 
      * fetchTckets Method is functioning
      * 
      * @test 
@@ -171,7 +153,6 @@ class TicketsTest extends TestCase
             ->call('fetchTickets')
             ->assertSee($tickets[0]->subject);
     }
-
     
     /** 
      * Weed-out unneeded params from $formFilters 
@@ -198,9 +179,10 @@ class TicketsTest extends TestCase
     
     /** 
      * Pagination is working properly
-     * Currently: $perPage = 10
+     * Currently, $perPage = 10
      * 
-     * @test */
+     * @test
+     * */
     function tickets_pagination_working_properly()
     {
         $this->actingAs(User::factory()->create());

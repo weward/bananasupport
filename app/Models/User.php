@@ -129,9 +129,9 @@ class User extends Authenticatable
      * @param  string       $orderBy
      * @return void
      */
-    public function scopeFilterOrder($query, $col = 'created_at', $orderBy = 'DESC')
+    public function scopeFilterOrder($query, $col = 'created_at', $sortBy = 'DESC')
     {
-        $query->orderBy($col, $orderBy);
+        $query->orderBy($col, $sortBy);
     }
     
 
@@ -149,7 +149,7 @@ class User extends Authenticatable
                 match ($key) {
                     'search' => $query->search($value),
                     'active' => $query->status($value),
-                    'sortBy' => $query->filterOrder($value, $params['orderBy']),
+                    'orderBy' => $query->filterOrder($value, $params['sortBy']),
                     default => '',
                 };
             }
