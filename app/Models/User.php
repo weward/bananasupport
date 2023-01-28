@@ -30,6 +30,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'active',
         'password',
     ];
 
@@ -116,7 +117,7 @@ class User extends Authenticatable
      */
     public function scopeStatus($query, $status)
     {
-        $status = ($status == 'inactive' || $status == 0) ? 0 : 1;
+        $status = ($status == 'inactive' || $status === 0) ? 0 : 1;
         $query->where('active', $status);
     }
 
@@ -147,7 +148,7 @@ class User extends Authenticatable
             if ($value) {
                 match ($key) {
                     'search' => $query->search($value),
-                    'status' => $query->status($value),
+                    'active' => $query->status($value),
                     'sortBy' => $query->filterOrder($value, $params['orderBy']),
                     default => '',
                 };

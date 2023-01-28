@@ -4,11 +4,11 @@
         <table class="w-full table-auto">
             <thead>
                 <tr>
-                    <th class="border-b-4 border-b-gray-100 p-3">Name</th>
-                    <th class="border-b-4 border-b-gray-100 p-3">Email</th>
-                    <th class="border-b-4 border-b-gray-100 p-3">Tickets</th>
-                    <th class="border-b-4 border-b-gray-100 p-3">Active</th>
-                    <th class="border-b-4 border-b-gray-100 p-3"></th>
+                    <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Name</th>
+                    <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Email</th>
+                    <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Tickets</th>
+                    <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Active</th>
+                    <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3"></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +28,7 @@
                         <a
                             href="#"
                             class="text-xl px-2 hover:text-amber-400 cursor-pointer"
-                            wire:click.prevent="$emitTo('edit-ticket-modal', 'editTicket', {{ $user->id }})"
+                            wire:click.prevent="$emitTo('edit-user-modal', 'editUser', {{ $user->id }})"
                             >
                             <ion-icon name="create" class="md:visible"></ion-icon>
                         </a>    

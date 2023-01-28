@@ -12,6 +12,7 @@ class UserStatusModal extends Component
     use HasToggleableModals;
 
     public $user;
+    public $showUserStatusModal = false;
 
     protected $listeners = [
         'toggleModal',

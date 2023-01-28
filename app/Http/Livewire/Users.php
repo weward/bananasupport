@@ -18,7 +18,7 @@ class Users extends Component
     public $showUsersFilter = false;
 
     public $search = '';
-    public $status = '';
+    public $active = '';
     public $sortBy = '';
     public $orderBy = '';
     private $users;
@@ -32,7 +32,7 @@ class Users extends Component
 
     public $defaultFilters = [
         'search' => '',
-        'status' => '',
+        'active' => '',
         'sortBy' => '',
         'orderBy' => "",
     ];
@@ -59,7 +59,7 @@ class Users extends Component
     {
         if (count($_GET)) {
             $this->search = request()->get('search') ?: '';
-            $this->status = request()->get('status') ?: '';
+            $this->active = request()->get('active') ?: '';
             $this->sortBy = request()->get('sortBy') ?: '';
             $this->orderBy = request()->get('orderBy') ?: '';
         }
@@ -76,7 +76,6 @@ class Users extends Component
         $filters = $this->formFilters();
 
         return User::filter($filters)
-            ->when(!$this->sortBy, fn ($query) => $query->latest())
             ->paginate($this->perPage)
             ->withQueryString();
     }
@@ -88,16 +87,14 @@ class Users extends Component
             $filters['search'] = $this->search;
         }
         
-        if ($this->status != '') {
-            $filters['status'] = $this->status;
+        if ($this->active != '') {
+            $filters['active'] = $this->active;
         }
 
-        if ($this->sortBy) {
-            $filters['sortBy'] = $this->sortBy;
-        }
-
+        $filters['sortBy'] = $this->sortBy != '' ? $this->sortBy : 'created_at';
+        
         $filters['orderBy'] = $this->orderBy ?: "DESC";
-
+        
         return $filters;
     }
 

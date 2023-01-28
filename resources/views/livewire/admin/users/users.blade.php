@@ -36,6 +36,7 @@
 
     
     @livewire('user-status-modal')
+    @livewire('edit-user-modal')
     
     
 </div>

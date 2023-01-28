@@ -47,14 +47,14 @@
                             <x-jet-label for="filter-users-status" class="text-left" value="{{ __('Status') }}"/>
                             <select 
                                 id="filter-users-status"
-                                wire:model.defer="status"
+                                wire:model.defer="active"
                                 wire:loading.attr="disabled"
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">
                                 <option value="">All</option>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
-                            <x-jet-input-error for="status" class="mt-2 text-left" />
+                            <x-jet-input-error for="active" class="mt-2 text-left" />
                         </div>
 
                         <div class="col-span-12 md:col-span-3 md:pl-2 md:pr-2">
