@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\TicketController;
 use App\Http\Livewire\Tickets;
+use App\Http\Livewire\Users;
 use App\Http\Livewire\ViewTicket;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Cache;
@@ -49,6 +50,7 @@ Route::prefix('admin')->middleware([
 
     Route::get('tickets', Tickets::class)->name('admin.livewire.tickets');
     Route::get('tickets/{ticket}', ViewTicket::class)->name('admin.livewire.tickets.show');
+    Route::get('users', Users::class)->name('admin.livewire.users');
 });
 
 

@@ -62,7 +62,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
         'readable_created_at',
-        'readable_updated_at'
+        'readable_updated_at',
+        'status_label',
     ];
 
     /**
@@ -79,6 +80,11 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function scopeId($query, $id)
+    {
+        $query->where('id', $id);
     }
 
     /**
@@ -103,6 +109,50 @@ class User extends Authenticatable
     public function scopeStatus($query, $status)
     {
         $query->where('active', $status);
+    }
+
+    /**
+     * Sort By a specific Column
+     *
+     * @param  QueryBuilder $query
+     * @param  string       $col
+     * @param  string       $orderBy
+     * @return void
+     */
+    public function scopeFilterOrder($query, $col = 'created_at', $orderBy = 'DESC')
+    {
+        $query->orderBy($col, $orderBy);
+    }
+    
+
+    /**
+     * Query Filter
+     *
+     * @param  QueryBuilder $query
+     * @param  array        $params
+     * @return void
+     */
+    public function scopeFilter($query, $params)
+    {
+        foreach ($params as $key => $value) {
+            if ($value) {
+                match ($key) {
+                    'status' => $query->status($value),
+                    'sortBy' => $query->filterOrder($value, $params['orderBy']),
+                    default => '',
+                };
+            }
+        }
+    }
+
+    /**
+     * Create status_label attribute
+     *
+     * @return string
+     */
+    public function getStatusLabelAttribute()
+    {
+        return $this->active ? "Active" : "Inactive";
     }
 
 }

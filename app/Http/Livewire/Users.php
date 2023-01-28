@@ -2,27 +2,25 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Ticket;
 use App\Models\User;
 use App\Traits\HasNavigation;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Tickets extends Component
+class Users extends Component
 {
-    use WithPagination;
+    // use WithPagination;
     use HasNavigation;
-    
-    public $title = "Ticket Mangement";
+
+    public $title = "User Management";
     public $description = "";
     public $perPage = 10;
-    public $showTicketsFilter = false;
+    public $showUsersFilter = false;
 
     public $status = '';
     public $sortBy = '';
     public $orderBy = '';
-    private $tickets;
-    
+    private $users;
 
     protected $listeners = [
         'tableUpdated' => 'render',
@@ -37,31 +35,16 @@ class Tickets extends Component
         'orderBy' => "",
     ];
 
-
     /**
      * Filter Tickets from Filter Form
      *
      * @return void
      */
-    public function filterTickets()
+    public function filter()
     {
-        $this->fetchTickets();
-
+        $this->fetchRecords();
         // Start monitoring Changes in URL query string 
         $this->queryString = array_keys($this->defaultFilters);
-    }
-    
-    /**
-     * Listen for sortBy form element update
-     * Display orderBy form element as per conditions
-     *
-     * @return void
-     */
-    public function selectSortBy()
-    {
-        if ($this->sortBy == '') {
-            $this->orderBy = 'desc';
-        }
     }
 
     /**
@@ -78,22 +61,21 @@ class Tickets extends Component
             $this->orderBy = request()->get('orderBy') ?: '';
         }
     }
-        
+
     /**
-     * Fetch All Tickets 
+     * Fetch All Users
      * according to filters
      *
      * @return void
      */
-    public function fetchTickets()
+    public function fetchRecords()
     {
         $filters = $this->formFilters();
 
-        return Ticket::filter($filters)
-            ->when(!$this->sortBy, fn($query) => $query->latest())
+        return User::filter($filters)
+            ->when(!$this->sortBy, fn ($query) => $query->latest())
             ->paginate($this->perPage)
             ->withQueryString();
-            
     }
 
     public function formFilters()
@@ -112,19 +94,12 @@ class Tickets extends Component
         return $filters;
     }
 
-    public function queryParameters()
-    {
-        $formFilters = $this->formFilters();
-
-        return $formFilters;
-    }
-
     public function render()
     {
-        $this->tickets = $this->fetchTickets();
+        $this->users = $this->fetchRecords();
 
-        return view('livewire.public.tickets.tickets', [
-            'tickets' => $this->tickets,
+        return view('livewire.admin.users.users', [
+            'users' => $this->users,
         ]);
     }
 
@@ -132,5 +107,4 @@ class Tickets extends Component
     {
         $this->fetchRequestParameters();
     }
-
 }

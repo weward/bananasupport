@@ -23,7 +23,10 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('admin.livewire.tickets') }}" :active="request()->routeIs('admin.livewire.tickets')">
-                        {{ __('Filed Tickets') }}
+                        {{ __('Tickets') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('admin.livewire.users') }}" :active="request()->routeIs('admin.livewire.users')">
+                        {{ __('Users') }}
                     </x-jet-nav-link>
                     @else 
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -31,7 +34,7 @@
                     </x-jet-nav-link>
                     
                     <x-jet-nav-link href="{{ route('livewire.tickets') }}" :active="request()->routeIs('livewire.tickets')">
-                        {{ __('Filed Tickets') }}
+                        {{ __('Tickets') }}
                     </x-jet-nav-link>
                     @endif
                 </div>
