@@ -51,4 +51,8 @@
 		</table>
     @endforeach
 	</div>
+@else
+	<div class="text-center">
+		<p class="p-12 text=sm text-gray-600 italic">There are no tickets.</p>
+	</div>
 @endif

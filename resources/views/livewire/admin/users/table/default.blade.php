@@ -1,6 +1,6 @@
 <div>
     @if ($users->count())
-    <div class="w-full border border-t-4 border-t-amber-200 rounded-t-xl">
+    <div class="w-full border border-t-2 border-t-amber-200 rounded-t-xl">
         <table class="w-full table-auto">
             <thead>
                 <tr>
