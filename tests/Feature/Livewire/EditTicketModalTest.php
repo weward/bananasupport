@@ -45,7 +45,7 @@ class EditTicketModalTest extends TestCase
     function editTicketModal_render_right_view_file()
     {
         $this->actingAs(User::factory()->create());
-        Ticket::factory()->count(4)->create();
+        Ticket::factory()->create();
 
         Livewire::test(EditTicketModal::class)
             ->call('render')
@@ -109,7 +109,7 @@ class EditTicketModalTest extends TestCase
             ->assertEmitted('tableUpdated');
     }
 
-    
+
 
 
 }
