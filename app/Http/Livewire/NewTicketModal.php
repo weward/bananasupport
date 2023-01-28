@@ -43,7 +43,7 @@ class NewTicketModal extends Component
 
     public function render()
     {
-        return view('livewire.public.tickets..new-ticket-modal');
+        return view('livewire.public.tickets.new-ticket-modal');
     }
 
     public function mount()
