@@ -33,8 +33,7 @@ class UserStatusModalTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
         $user = User::factory()->create();
-
-        $this->actingAs(User::factory()->create());
+        
         $this->get(route('admin.livewire.users'))->assertSeeLivewire('user-status-modal');
         $this->get(route('admin.livewire.users.show', ['user' => $user]))->assertSeeLivewire('user-status-modal');
     }

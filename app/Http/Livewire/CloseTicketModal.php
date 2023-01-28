@@ -40,7 +40,7 @@ class CloseTicketModal extends Component
         if (request()->routeIs('admin.livewire.tickets')) {
             $this->emitTo('tickets', 'tableUpdated');
             return;
-        } 
+        }
 
         $this->emitTo('view-ticket', 'refresh');
     }
