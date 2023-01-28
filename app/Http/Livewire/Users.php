@@ -28,7 +28,12 @@ class Users extends Component
     ];
 
     /** Livewire */
-    protected $queryString = [];
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'active' => ['except' => ''],
+        'sortBy' => ['except' => ''],
+        'orderBy' => ['except' => ''],
+    ];
 
     public $defaultFilters = [
         'search' => '',
@@ -44,25 +49,9 @@ class Users extends Component
      */
     public function filterUsers()
     {
-        $this->fetchRecords();
-        // Start monitoring Changes in URL query string 
-        $this->queryString = array_keys($this->defaultFilters);
-    }
-
-    /**
-     * Fetch request params from the URL for filtering
-     * Access / Filter directly
-     *
-     * @return void
-     */
-    public function fetchRequestParameters()
-    {
-        if (count($_GET)) {
-            $this->search = request()->get('search') ?: '';
-            $this->active = request()->get('active') ?: '';
-            $this->sortBy = request()->get('sortBy') ?: '';
-            $this->orderBy = request()->get('orderBy') ?: '';
-        }
+        // Remove ?page=
+        $this->resetPage();
+        $this->render();
     }
 
     /**
@@ -76,8 +65,7 @@ class Users extends Component
         $filters = $this->formFilters();
 
         return User::filter($filters)
-            ->paginate($this->perPage)
-            ->withQueryString();
+            ->paginate($this->perPage);
     }
 
     public function formFilters()
@@ -107,8 +95,4 @@ class Users extends Component
         ]);
     }
 
-    public function mount()
-    {
-        $this->fetchRequestParameters();
-    }
 }

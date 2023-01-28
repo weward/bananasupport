@@ -30,13 +30,18 @@ class Tickets extends Component
     ];
 
     /** Livewire */
-    protected $queryString = [];
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'status' => ['except' => ''],
+        'sortBy' => ['except' => ''],
+        'orderBy' => ['except' => ''],
+    ];
 
     public $defaultFilters = [
         'search' => '',
         'status' => '',
         'sortBy' => '',
-        'orderBy' => "",
+        'orderBy' => ''
     ];
 
 
@@ -47,10 +52,9 @@ class Tickets extends Component
      */
     public function filterTickets()
     {
-        $this->fetchTickets();
-
-        // Start monitoring Changes in URL query string 
-        $this->queryString = array_keys($this->defaultFilters);
+        // Remove ?page=
+        $this->resetPage();
+        $this->render();
     }
     
     /**
@@ -67,22 +71,6 @@ class Tickets extends Component
     }
 
     /**
-     * Fetch request params from the URL for filtering
-     * Access / Filter directly
-     *
-     * @return void
-     */
-    public function fetchRequestParameters()
-    {
-        if (count($_GET)) {
-            $this->search = request()->get('search') ?: '';
-            $this->status = request()->get('status') ?: '';
-            $this->sortBy = request()->get('sortBy') ?: '';
-            $this->orderBy = request()->get('orderBy') ?: '';
-        }
-    }
-        
-    /**
      * Fetch All Tickets 
      * according to filters
      *
@@ -93,9 +81,7 @@ class Tickets extends Component
         $filters = $this->formFilters();
 
         return Ticket::filter($filters)
-            ->when(!$this->sortBy, fn($query) => $query->latest())
-            ->paginate($this->perPage)
-            ->withQueryString();
+            ->paginate($this->perPage);
             
     }
 
@@ -119,13 +105,6 @@ class Tickets extends Component
         return $filters;
     }
 
-    public function queryParameters()
-    {
-        $formFilters = $this->formFilters();
-
-        return $formFilters;
-    }
-
     public function render()
     {
         $this->tickets = $this->fetchTickets();
@@ -135,9 +114,5 @@ class Tickets extends Component
         ]);
     }
 
-    public function mount()
-    {
-        $this->fetchRequestParameters();
-    }
 
 }

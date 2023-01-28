@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Traits\HasToggleableModals;
 use App\Traits\HasUserForm;
 use App\Traits\HasUsers;
-use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class EditUserModal extends Component
