@@ -3,6 +3,7 @@
 namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\ViewTicket;
+use App\Models\Admin;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -80,12 +81,13 @@ class ViewTicketTest extends TestCase
     function ViewTicket_pass_data_to_view_with_comments_displayed()
     {
         $this->actingAs(User::factory()->create());
+        Admin::factory()->create();
         $ticket = Ticket::factory()->hasComments(3)->create();
 
         Livewire::test(ViewTicket::class, ['ticket' => $ticket])
             ->call('render')
             ->assertViewHas('ticket', $ticket)
-            ->assertSee($ticket->comments[0]->content);  
+            ->assertSee($ticket->comments[0]?->content);
     }
 
 }
