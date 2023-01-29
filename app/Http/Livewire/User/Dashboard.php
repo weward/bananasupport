@@ -17,6 +17,7 @@ class Dashboard extends Component
                 $query->status(1);
             })
             ->count();
+            
         if ($isActive) {
             $this->activeTickets = $total;
             return;
