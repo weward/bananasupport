@@ -4,6 +4,7 @@ namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\ViewTicket;
 use App\Models\Admin;
+use App\Models\Comment;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,8 +23,8 @@ class ViewTicketTest extends TestCase
      * */
     public function viewTicket_livewire_component_accessible()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         $component = Livewire::test(ViewTicket::class, ['ticket' => $ticket]);
         $component->assertStatus(200);
@@ -36,8 +37,8 @@ class ViewTicketTest extends TestCase
      * */
     public function tickets_page_render_ViewTicket_livewire_component()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         $this->get(route('livewire.tickets.show', ['ticket' => $ticket->id]))->assertSeeLivewire('view-ticket');
     }
@@ -50,8 +51,8 @@ class ViewTicketTest extends TestCase
      * */
     function ViewTicket_render_right_view_file()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(ViewTicket::class, ['ticket' => $ticket])
             ->call('render')
@@ -65,8 +66,8 @@ class ViewTicketTest extends TestCase
      * */
     function ViewTicket_pass_data_to_view()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(ViewTicket::class, ['ticket' => $ticket])
             ->call('render')
@@ -80,9 +81,33 @@ class ViewTicketTest extends TestCase
      * */
     function ViewTicket_pass_data_to_view_with_comments_displayed()
     {
-        $this->actingAs(User::factory()->create());
+        $this->actingAs($user = User::factory()->create());
         Admin::factory()->create();
-        $ticket = Ticket::factory()->hasComments(3)->create();
+     
+        $ticket = Ticket::factory()
+            ->has(
+                Comment::factory()
+                    ->state(function (array $attributes, Ticket $ticket) {
+                        $isUser = rand(0, 100);
+                        $isUser = ($isUser % 2 == 0); // user = even 
+                        if ($isUser) {
+                            return [
+                                'ticket_id' => $ticket->id,
+                                'commentable_id' => $ticket->user_id,
+                                'commentable_type' => User::class,
+                            ];
+                        }
+                        $admin = Admin::first();
+                        return [
+                            'ticket_id' => $ticket->id,
+                            'commentable_id' => $admin->id,
+                            'commentable_type' => Admin::class,
+                        ];
+                    })
+                    ->count(3) // comment count
+            )
+            ->ofUser($user->id)
+            ->create();
 
         Livewire::test(ViewTicket::class, ['ticket' => $ticket])
             ->call('render')

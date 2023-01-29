@@ -32,8 +32,8 @@ class CloseTicketModalTest extends TestCase
      * */
     public function tickets_page_render_closeTicketModal_livewire_component()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         $this->get(route('livewire.tickets'))->assertSeeLivewire('close-ticket-modal');
         $this->get(route('livewire.tickets.show', ['ticket' => $ticket]))->assertSeeLivewire('close-ticket-modal');
@@ -59,8 +59,8 @@ class CloseTicketModalTest extends TestCase
      * */
     function load_ticket_data_for_close_ticket_modal()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(CloseTicketModal::class)
             ->emit('closeTicket', $ticket->id)
@@ -75,8 +75,8 @@ class CloseTicketModalTest extends TestCase
      */
     function close_ticket_modal_update()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(CloseTicketModal::class)
             ->set('ticket', $ticket)

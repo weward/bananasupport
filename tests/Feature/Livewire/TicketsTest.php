@@ -44,8 +44,8 @@ class TicketsTest extends TestCase
      * */
     function tickets_page_render_right_view_file()
     {
-        $this->actingAs(User::factory()->create());
-        Ticket::factory()->count(4)->create();
+        $this->actingAs($user = User::factory()->create());
+        Ticket::factory()->ofUser($user->id)->count(4)->create();
 
         Livewire::test(Tickets::class)
             ->call('render')
@@ -59,8 +59,8 @@ class TicketsTest extends TestCase
      * */
     function can_filter_tickets_by_ticket_number()
     {
-        $this->actingAs(User::factory()->create());
-        $tickets = Ticket::factory()->count(3)->create();
+        $this->actingAs($user = User::factory()->create());
+        $tickets = Ticket::factory()->ofUser($user->id)->count(3)->create();
 
         Livewire::withQueryParams([
             'page' => 1,
@@ -79,10 +79,10 @@ class TicketsTest extends TestCase
      * */
     function can_filter_tickets_by_status()
     {
-        $this->actingAs(User::factory()->create());
+        $this->actingAs($user = User::factory()->create());
 
-        $openTickets = Ticket::factory()->open()->count(1)->create();
-        $closedTickets = Ticket::factory()->closed()->count(2)->create();
+        $openTickets = Ticket::factory()->ofUser($user->id)->open()->count(1)->create();
+        $closedTickets = Ticket::factory()->ofUser($user->id)->closed()->count(2)->create();
 
         Livewire::withQueryParams([
             'page' => 1,
@@ -101,9 +101,8 @@ class TicketsTest extends TestCase
      * */
     function can_filter_tickets_by_orderBy_parameter()
     {
-        $this->actingAs(User::factory()->create());
-
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::withQueryParams([
             'page' => 100,
@@ -121,9 +120,8 @@ class TicketsTest extends TestCase
      * */
     function can_filter_tickets_by_orderBy_with_sortBy_parameter()
     {
-        $this->actingAs(User::factory()->create());
-
-        $tickets = Ticket::factory()->count(5)->create();
+        $this->actingAs($user = User::factory()->create());
+        $tickets = Ticket::factory()->ofUser($user->id)->count(5)->create();
         // force adjust updated_at
         $tickets[4]->update([
             'subject' => 'New Subject',
@@ -146,8 +144,8 @@ class TicketsTest extends TestCase
      * */
     function fetchTickets_functioning_properly()
     {
-        $this->actingAs(User::factory()->create());
-        $tickets = Ticket::factory()->count(3)->create();
+        $this->actingAs($user = User::factory()->create());
+        $tickets = Ticket::factory()->ofUser($user->id)->count(3)->create();
 
         Livewire::test(Tickets::class)
             ->call('fetchTickets')
@@ -162,8 +160,8 @@ class TicketsTest extends TestCase
      * */
     function set_only_needed_formFilters_value_for_query_filters()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         $a = Livewire::withQueryParams([
             'page' => 1, 
@@ -185,8 +183,8 @@ class TicketsTest extends TestCase
      * */
     function tickets_pagination_working_properly()
     {
-        $this->actingAs(User::factory()->create());
-        $tickets = Ticket::factory()->count(20)->create();
+        $this->actingAs($user = User::factory()->create());
+        $tickets = Ticket::factory()->ofUser($user->id)->count(20)->create();
 
         Livewire::withQueryParams([
             'page' => 2,

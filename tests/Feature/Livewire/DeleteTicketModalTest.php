@@ -32,8 +32,8 @@ class DeleteTicketModalTest extends TestCase
      * */
     public function tickets_page_render_deleteTicketModal_livewire_component()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        Ticket::factory()->ofUser($user->id)->create();
 
         $this->get(route('livewire.tickets'))->assertSeeLivewire('delete-ticket-modal');
     }
@@ -58,8 +58,8 @@ class DeleteTicketModalTest extends TestCase
      * */
     function load_ticket_data_for_close_ticket_modal()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(DeleteTicketModal::class)
             ->emit('deleteTicket', $ticket->id)
@@ -74,8 +74,8 @@ class DeleteTicketModalTest extends TestCase
      */
     function close_ticket_modal_update()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(DeleteTicketModal::class)
             ->set('ticket', $ticket)

@@ -29,6 +29,7 @@ class TicketFactory extends Factory
             'subject' => fake()->realText(50, 1),
             'content' => fake()->realText(200, 2),
             'user_id' => User::factory(),
+            'status' => 1,
             // 'user_id' => $this->assignUser(),
         ];
     }
@@ -52,6 +53,13 @@ class TicketFactory extends Factory
     public function open()
     {
         return $this->state(fn (array $attributes) => ['status' => 1]);
+    }
+
+    public function ofUser($userId)
+    {
+        return $this->state(function (array $attributes) use ($userId) {
+            return ['user_id' => $userId];
+    });
     }
 
     public function assignUser()

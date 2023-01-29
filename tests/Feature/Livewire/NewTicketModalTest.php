@@ -44,8 +44,8 @@ class NewTicketModalTest extends TestCase
      * */
     function newTicketModal_render_right_view_file()
     {
-        $this->actingAs(User::factory()->create());
-        Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(NewTicketModal::class)
             ->call('render')
@@ -59,8 +59,8 @@ class NewTicketModalTest extends TestCase
      */
     function newTicketModal_toggle_modal()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(NewTicketModal::class)
             ->emit('toggleTicketModal', 'New')

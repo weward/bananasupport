@@ -81,7 +81,7 @@ class ViewUserTest extends TestCase
     {
         $this->actingAs($user = User::factory()->create());
         // Create tickets for lone user
-        Ticket::factory()->count(3)->create();
+        $ticket = Ticket::factory()->ofUser($user->id)->count(3)->create();
 
         $user->load(['tickets']);
         

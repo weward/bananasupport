@@ -44,8 +44,8 @@ class EditTicketModalTest extends TestCase
      * */
     function editTicketModal_render_right_view_file()
     {
-        $this->actingAs(User::factory()->create());
-        Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(EditTicketModal::class)
             ->call('render')
@@ -59,8 +59,9 @@ class EditTicketModalTest extends TestCase
      */
     function editTicketModal_fetch_form_data()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
+
         Livewire::test(EditTicketModal::class)
             ->emit('editTicket', $ticket->id)
             ->assertSet('formData.subject', $ticket->subject)
@@ -74,8 +75,8 @@ class EditTicketModalTest extends TestCase
      */
     function editTicketModal_loads_data_to_form()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(EditTicketModal::class)
             ->emit('editTicket', $ticket->id)
@@ -95,8 +96,8 @@ class EditTicketModalTest extends TestCase
      */    
     function editTicketModal_update()
     {
-        $this->actingAs(User::factory()->create());
-        $ticket = Ticket::factory()->create();
+        $this->actingAs($user = User::factory()->create());
+        $ticket = Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(EditTicketModal::class)
             ->set('ticket', $ticket)
