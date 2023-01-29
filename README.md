@@ -28,18 +28,25 @@ Modify `.env` values
 composer install
 ```
 
-### Generate security key
+### Generate Security Key
 
 ```
 # RUN
 php artisan key:generate
 ```
 
-### Install javscript Dependencies
+### Install Javascript Dependencies
 
 ```
 # Run
 npm install
+```
+
+### Build Assets
+
+```
+# Run
+npm run build
 ```
 
 ### Migrate Database
@@ -73,6 +80,11 @@ Email: info@codingmonkeys.nl
 Pass: password
 ```
 
+### All User Password
+
+```
+Password: password
+```
 
 ## Tests
 
