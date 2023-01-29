@@ -40,8 +40,12 @@
             @endif
 
             <!-- Page Content -->
-            <main >
+            <main class="p-3 md:p-12">
                 {{ $slot }}
+
+                <div class="text-center mt-24 pb-12 md:pb-1">
+                    <span class="text-sm text-gray-300 font-extrabold">dev.weward@gmail.com</span>
+                </div>
             </main>
         </div>
 

@@ -96,9 +96,7 @@ class Tickets extends Component
             $filters['status'] = $this->status;
         }
 
-        if ($this->orderBy) {
-            $filters['orderBy'] = $this->orderBy;
-        }
+        $filters['orderBy'] = $this->orderBy ?: "created_at";
 
         $filters['sortBy'] = $this->sortBy ?: "DESC";
 
