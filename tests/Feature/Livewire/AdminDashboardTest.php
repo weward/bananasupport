@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\User\Dashboard;
+use App\Http\Livewire\Admin\Dashboard;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class UserDashboardTest extends TestCase
+class AdminDashboardTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,10 +19,10 @@ class UserDashboardTest extends TestCase
      *  
      * @test 
      * */
-    function userDashboard_livewire_component_accessible()
+    function adminDashboard_livewire_component_accessible()
     {
         $this->actingAs($user = User::factory()->create());
-        $ticket = Ticket::factory()->ofUser($user->id)->create();
+        Ticket::factory()->ofUser($user->id)->create();
 
         $component = Livewire::test(Dashboard::class);
         $component->assertStatus(200);
@@ -33,12 +33,12 @@ class UserDashboardTest extends TestCase
      * 
      * @test 
      */
-    function userDashboard_page_render_livewire_component()
+    function adminDashboard_page_render_livewire_component()
     {
         $this->actingAs($user = User::factory()->create());
         Ticket::factory()->ofUser($user->id)->create();
 
-        $this->get('/dashboard')->assertSeeLivewire('user.dashboard');
+        $this->get(route('admin.dashboard'))->assertSeeLivewire('admin.dashboard');
     }
 
 
@@ -47,31 +47,31 @@ class UserDashboardTest extends TestCase
      * 
      * @test 
      */
-    function userDashboardTest__render_right_view_file()
+    function adminDashboardTest__render_right_view_file()
     {
         $this->actingAs($user = User::factory()->create());
         Ticket::factory()->ofUser($user->id)->create();
 
         Livewire::test(Dashboard::class)
             ->call('render')
-            ->assertViewIs('livewire.user.dashboard');
+            ->assertViewIs('livewire.admin.dashboard');
     }
 
     /**
      * Test Values upon render()
      * @test
      */
-    function userDashboardTest_render()
+    function adminDashboardTest_render()
     {
         $this->actingAs($user = User::factory()->create());
+        User::factory()->count(9)->create(); 
         Ticket::factory()->ofUser($user->id)->open()->count(3)->create();
         Ticket::factory()->ofUser($user->id)->closed()->count(1)->create();
 
         Livewire::test(Dashboard::class)
             ->call('render')
             ->assertSet('totalTickets', 4)
-            ->assertSet('activeTickets', 3);
+            ->assertSet('activeTickets', 3)
+            ->assertSet('totalUsers', 10);
     }
-
-
 }
