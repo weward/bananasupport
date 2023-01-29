@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <x-jet-application-logo class="block h-24 mx-auto w-full" />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -51,7 +51,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4 bg-amber-200 hover:bg-amber-100 text-black">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>

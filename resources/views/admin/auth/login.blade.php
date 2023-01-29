@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        <x-slot name="logo" class="text-center">
+            <x-jet-application-logo class="block h-24 mx-auto w-full" />
+            <h1 class="text-center pt-3 text-lg text-amber-700 font-extrabold">ADMIN LOGIN</h1>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
