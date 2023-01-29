@@ -91,19 +91,29 @@ php artisan test --filter NewTicketModal
 
 ---
 
-# Info
+# Additional Info
 
-Additional Features
+### Additional Features
+
 - Separate Admin and User portals
+
 - Global scope to separate admin and user queries
+
 - Seeder for sample data
+
 - Tests
+
 - Custom UI
 
+
 ### Tech Stack 
+
 - Laravel 9
+
 - Livewire
+
 - Tailwind
+
 
 ---
 
