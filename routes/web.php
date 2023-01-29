@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Tickets;
+use App\Http\Livewire\User\Dashboard as UserDashboard;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\ViewTicket;
 use App\Http\Livewire\ViewUser;
@@ -53,9 +55,7 @@ Route::prefix('admin')->middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('admin.dashboard');
+    Route::get('dashboard', Dashboard::class)->name('admin.dashboard');
 
     Route::get('tickets', Tickets::class)->name('admin.livewire.tickets');
     Route::get('tickets/{ticket}', ViewTicket::class)->name('admin.livewire.tickets.show');
@@ -74,9 +74,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', UserDashboard::class)->name('dashboard');
 
     Route::get('tickets', Tickets::class)->name('livewire.tickets');
     Route::get('tickets/{ticket}', ViewTicket::class)->name('livewire.tickets.show');

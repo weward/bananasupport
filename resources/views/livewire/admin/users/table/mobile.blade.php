@@ -6,7 +6,6 @@
                 <tr class="bg-gray-100 flex flex-col flex-no wrap rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Name</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Email</th>
-					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Tickets</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Active</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50">Created</th>
 					<th class="p-3 text-sm text-left font-normal border-b border-gray-50" width="10px">Actions</th>
@@ -16,7 +15,6 @@
 				<tr class="flex flex-col flex-nowrap mb-2 sm:mb-0">
 					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3 truncate">{{ $user->name }}</td>
 					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3 truncate">{{ $user->email }}</td>
-					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3 truncate">{{ $user->ticket_count ?? '0' }}</td>
 					<td class="text-sm border-grey-light border hover:bg-gray-100 p-3">
                         <span class='p-1 px-2 rounded-lg text-xs text-white {{ $user->active ? "bg-green-400" : "bg-red-400" }}'>{{ $user->status_label }}</span>
                     </td>

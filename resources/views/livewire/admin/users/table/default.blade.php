@@ -6,7 +6,6 @@
                 <tr>
                     <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Name</th>
                     <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Email</th>
-                    <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Tickets</th>
                     <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3">Active</th>
                     <th class="text-sm text-gray-600 border-b-2 border-b-gray-100 p-3"></th>
                 </tr>
@@ -16,7 +15,6 @@
                 <tr class="@if($loop->odd) {{ 'bg-gray-50' }} @else {{ '' }} @endif hover:bg-gray-100">
                     <td class="p-3">{{ $user->name }}</td>
                     <td class="p-3">{{ $user->email }}</td>
-                    <td class="p-3"></td>
                     <td class="p-3"><span class='p-1 px-2 rounded-lg text-xs text-white {{ $user->active ? "bg-green-400" : "bg-gray-300" }}'>{{ $user->status_label }}</span></td>
                     <td class="p-3 text-right">
                         <a 
