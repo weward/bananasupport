@@ -1,7 +1,7 @@
-<div class="py-12 p-1 md:p-none">
+<div class="px-1 py-3 md:py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <div class="p-6 sm:px-20 bg-white border-b border-gray-200 text-center border-t-4 border-t-amber-200 rounded-xl">
+            <div class="p-6 py-12 sm:px-20 bg-white border-b border-gray-200 text-center border-t-4 border-t-amber-200 rounded-xl">
                 <div>
                     <x-jet-application-logo class="block h-24 mx-auto w-full" />
                 </div>
@@ -19,16 +19,16 @@
 
                 <div class="py-12 md:p-6 md:border-r text-center">
                     <div class="">
-                        <div class="text-lg text-gray-600 leading-7 font-semibold"><a href="https://bitbucket.org/rolandedwardsantos">My Tickets</a></div>
+                        <div class="text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('livewire.tickets') }}">My Tickets</a></div>
                     </div>
 
                     <div class="">
                         <div class="mt-2 text-6xl text-gray-500">
-                            {{ $totalTickets }}
+                            {{ number_format($totalTickets) }}
                         </div>
 
                         <div class="text-center">
-                            <a href="@if(auth()->guard('admin')->check()){{ route('admin.livewire.tickets') }}@else{{ route('livewire.tickets') }}@endif">
+                            <a href="{{ route('livewire.tickets') }}">
                                 <div class="mt-3 text-sm font-semibold text-indigo-700 flex justify-center">
                                     <div>View Tickets</div>
 
@@ -45,12 +45,12 @@
 
                 <div class="py-12 md:p-6  md:border-r text-center">
                     <div class="">
-                        <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://bitbucket.org/rolandedwardsantos">Active Tickets</a></div>
+                        <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="{{ route('livewire.tickets') }}?status=open">Active Tickets</a></div>
                     </div>
 
                     <div class="grid grid-flow-row auto-rows-max text-center">
                         <div class="mt-2 text-6xl text-gray-500">
-                            {{ $activeTickets }}
+                            {{ number_format($activeTickets) }}
                         </div>
 
                         <div class="text-center">
