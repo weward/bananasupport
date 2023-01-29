@@ -2,65 +2,129 @@
 
 Laravel 9 + Livewire + Tailwind 
 
+```
+
+Author: Roland Edward Santos
+Email: dev.weward@gmail.com
+Bitbucket: https://bitbucket.org/rolandedwardsantos
+LinkedIn: https://linkedin.com/roland-edward-santos
+
+```
+[Bitbucket Profile](https://bitbucket.org/rolandedwardsantos)
+
+[Add me on LinkedIn](https://linkedin.com/roland-edward-santos)
 
 .
 ---
 
-### Installation
+# Installation
 
-- Modify `.env` values
+Modify `.env` values
 
-Install Dependencies 
+### Install Dependencies 
 
 ```
 # RUN
 composer install
 ```
 
-Generate security key
+### Generate security key
 
 ```
 # RUN
 php artisan key:generate
 ```
 
-Install javscript Dependencies
+### Install javscript Dependencies
 
 ```
 # Run
 npm install
 ```
 
-Migrate Database
+### Migrate Database
 
 ```
 # RUN
 php artisan migrate
 ```
 
-Seed Admin 
+### Seed Data
+
+Includes Admin seeder and
+
+By default, this will generate 2000 Users, max of 10 tickets per user, and max of 10 comments per ticket.
+
+To modify the limits, edit the `database/seeders/AppInitialSeeder.php` file.
+
+Note: This will generate the Admin Login as well.
 
 ```
 # RUN
-php artisan db:seed --class=AdminTableSeeder
+php artisan db:seed --class=AppInitialSeeder
 ```
 
 
 ### Admin Login Details
 
 ```
+Url: /admin
 Email: info@codingmonkeys.nl
 Pass: password
 ```
 
-### Seed Users
+
+## Tests
+
+To run the tests
 
 ```
-php artisan db:seed --class=UsersTableSeeder
+# Run
+
+php artisan test
+
+
+# Or, run a specific test:
+php artisan test --filter NewTicketModal
 ```
 
-### Seed Tickets
+
+---
+
+# Info
+
+Additional Features
+- Separate Admin and User portals
+- Global scope to separate admin and user queries
+- Seeder for sample data
+- Tests
+- Custom UI
+
+### Tech Stack 
+- Laravel 9
+- Livewire
+- Tailwind
+
+---
+
+This app has implemented the required features as detailed in the `Coding Monkeys - Technical Challenge.pdf` file sent by the hiring manager. 
+
+This app is purely a demo application. There are a lot of improvements to be done to produce, at least, an MVP. 
+But, I am hoping that this app has given you a glimpse of my skills.
+
+I am hoping that we could eventually work together professionally (hoping soon!) and produce something that is more structured and technical.
+
+Thank you. 
 
 ```
-php artisan db:seed --class=TicketsTableSeeder
+
+Author: Roland Edward Santos
+Email: dev.weward@gmail.com
+Bitbucket: https://bitbucket.org/rolandedwardsantos
+LinkedIn: https://linkedin.com/roland-edward-santos
+
 ```
+
+[Bitbucket Profile](https://bitbucket.org/rolandedwardsantos)
+
+[Add me on LinkedIn](https://linkedin.com/roland-edward-santos)
