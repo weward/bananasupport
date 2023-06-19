@@ -13,13 +13,15 @@
         </h2>
     </x-slot>
 
+    <div wire:offline>You are offline</div>
+
     <div class="pt-3" >
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
 
                 @include('livewire.public.tickets.filter')
                 
-                <div class="invisible max-h-0 md:visible md:max-h-max">
+                <div class="invisible max-h-0 md:visible md:max-h-max" wire:init="isReady">
 
                     @include('livewire.public.tickets.table.default')
                     
@@ -29,6 +31,10 @@
 
                     @include('livewire.public.tickets.table.mobile')
 
+                </div>
+
+                <div class="w-full text-center" wire:loading>
+                    <p class="p-12 text=sm text-gray-600 italic">Loading...</p>
                 </div>
                 
                 <div class="mt-6">

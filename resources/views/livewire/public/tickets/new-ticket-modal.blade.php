@@ -1,15 +1,16 @@
-<div>
-    <div>
+<div x-data="{ open: @entangle('showNewModal') }" >
+    <div >
         <x-jet-secondary-button 
             id="new-ticket-btn"
             wire:loading.attr="disabled"
             class="px-4 py-2 rounded-md bg-amber-400 hover:bg-amber-200 click:text-black text-white"
-            wire:click="$emit('toggleTicketModal', 'New', true)">
+            @click="open = true"
+            >
                 {{ _('Support') }}
         </x-jet-secondary-button>
     </div>
 
-    <x-jet-dialog-modal wire:model="showNewModal">
+    <x-jet-dialog-modal wire:model="showNewModal" >
 
         <x-slot name="content">
             
@@ -56,7 +57,7 @@
         <x-slot name="footer">
             <x-jet-secondary-button 
                 id="new-ticket-cancel"
-                wire:click="$emit('toggleTicketModal', 'New', false)" 
+                @click="open = false"
                 wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
@@ -65,7 +66,7 @@
                 id="new-ticket-submit"
                 class="ml-3 bg-amber-400 hover:bg-amber-200"
                 wire:click="createNewTicket" 
-                wire:ignoer.self
+                wire:ignore.self
                 wire:loading.attr="disabled">
                 {{ __('Submit') }}
             </x-jet-button>

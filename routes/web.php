@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::bind('ticket', function($ticket) {
     return Cache::rememberForever("ticket-{$ticket}", function () use ($ticket) {
         return Ticket::findOrFail($ticket);

@@ -17,6 +17,7 @@ class Tickets extends Component
     public $description = "";
     public $perPage = 10;
     public $showTicketsFilter = false;
+    public $isReady = false;
 
     public $search = '';
     public $status = '';
@@ -103,12 +104,17 @@ class Tickets extends Component
         return $filters;
     }
 
+    public function isReady()
+    {
+        $this->isReady = true;
+    }
+
     public function render()
     {
         $this->tickets = $this->fetchTickets();
 
         return view('livewire.public.tickets.tickets', [
-            'tickets' => $this->tickets,
+            'tickets' => $this->isReady ? $this->tickets : Ticket::id(0)->paginate(),
         ]);
     }
 

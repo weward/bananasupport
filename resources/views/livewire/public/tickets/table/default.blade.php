@@ -56,11 +56,12 @@
         </div>
         
         @endforeach 
-    @else 
-        <div class="text-center">
+    @endif 
+    
+    @if (!$tickets->count() && $isReady)
+        <div class="text-center" wire:loading.remove>
             <p class="p-12 text=sm text-gray-600 italic">There are no tickets.</p>
         </div>
-
     @endif
 
 </div>

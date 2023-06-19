@@ -14,7 +14,7 @@ class NewTicketModal extends Component
     protected $listeners = [
         'toggleTicketModal'
     ];
-
+    
     public function createNewTicket()
     {
         $this->validate();
@@ -43,6 +43,7 @@ class NewTicketModal extends Component
 
     public function render()
     {
+        $this->resetForm();
         return view('livewire.public.tickets.new-ticket-modal');
     }
 
